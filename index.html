@@ -1,0 +1,2753 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Postpartum Daily Planner</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:wght@300;400;500&display=swap');
+
+/* ══════════════════════════════════
+COLOR THEMES  (light base vars)
+Each theme defines: bg, surface, surface-2,
+ink, ink-light, ink-faint, rule,
+accent, accent-2, accent-soft,
+baby-a/b/c/d + soft, breast+soft, bottle+soft,
+shadow
+══════════════════════════════════ */
+
+/* shared non-color vars */
+:root { –radius: 12px; –surface: #ffffff; }
+
+/* ── BLUSH (default) ── */
+:root, [data-color=“blush”] {
+–bg:          #fce8e4;
+–surface-2:   #fce8e4;
+–ink:         #2e1f1f;
+–ink-light:   #6b4f4f;
+–ink-faint:   #b89c9c;
+–rule:        #f0ddd8;
+–accent:      #c47a7a;
+–accent-2:    #c46a5a;
+–accent-soft: #fceee8;
+–baby-a:      #c47a7a; –baby-a-soft: #fceee8;
+–baby-b:      #a07ab8; –baby-b-soft: #f3ecfa;
+–baby-c:      #7a9ec4; –baby-c-soft: #e8f2fa;
+–baby-d:      #c49a7a; –baby-d-soft: #faf0e8;
+–breast:      #c47a7a; –breast-soft: #fceee8;
+–bottle:      #7a9ec4; –bottle-soft: #e8f2fa;
+–shadow:      0 1px 3px rgba(180,100,100,.07), 0 4px 16px rgba(180,100,100,.06);
+}
+
+/* ── LAVENDER ── */
+[data-color=“lavender”] {
+–bg:          #ede8f7;
+–surface-2:   #ede8f7;
+–ink:         #1e1a2e;
+–ink-light:   #4e4870;
+–ink-faint:   #9e98c0;
+–rule:        #ddd8f0;
+–accent:      #8878c8;
+–accent-2:    #7060b0;
+–accent-soft: #e8e4f8;
+–baby-a:      #8878c8; –baby-a-soft: #e8e4f8;
+–baby-b:      #c878a8; –baby-b-soft: #f8e4f0;
+–baby-c:      #78a8c8; –baby-c-soft: #e4f0f8;
+–baby-d:      #a898d8; –baby-d-soft: #ece8fc;
+–breast:      #c878a8; –breast-soft: #f8e4f0;
+–bottle:      #78a8c8; –bottle-soft: #e4f0f8;
+–shadow:      0 1px 3px rgba(100,80,180,.07), 0 4px 16px rgba(100,80,180,.06);
+}
+
+/* ── SAGE ── */
+[data-color=“sage”] {
+–bg:          #e4ede6;
+–surface-2:   #e4ede6;
+–ink:         #1a2a1e;
+–ink-light:   #456050;
+–ink-faint:   #90afa0;
+–rule:        #ccddd0;
+–accent:      #6a9e7a;
+–accent-2:    #508868;
+–accent-soft: #ddeee2;
+–baby-a:      #6a9e7a; –baby-a-soft: #ddeee2;
+–baby-b:      #9e8a6a; –baby-b-soft: #f0ead8;
+–baby-c:      #6a8a9e; –baby-c-soft: #d8e8f0;
+–baby-d:      #8a9e6a; –baby-d-soft: #e2eedd;
+–breast:      #9e8a6a; –breast-soft: #f0ead8;
+–bottle:      #6a8a9e; –bottle-soft: #d8e8f0;
+–shadow:      0 1px 3px rgba(80,140,100,.07), 0 4px 16px rgba(80,140,100,.06);
+}
+
+/* ── PEACH ── */
+[data-color=“peach”] {
+–bg:          #fdeee4;
+–surface-2:   #fdeee4;
+–ink:         #2e1e10;
+–ink-light:   #7a5038;
+–ink-faint:   #c0a090;
+–rule:        #f5dac8;
+–accent:      #e08850;
+–accent-2:    #c87038;
+–accent-soft: #fde8d8;
+–baby-a:      #e08850; –baby-a-soft: #fde8d8;
+–baby-b:      #c87888; –baby-b-soft: #fde0e4;
+–baby-c:      #88a8c8; –baby-c-soft: #dceaf8;
+–baby-d:      #d8a878; –baby-d-soft: #fce8d4;
+–breast:      #c87888; –breast-soft: #fde0e4;
+–bottle:      #88a8c8; –bottle-soft: #dceaf8;
+–shadow:      0 1px 3px rgba(200,120,60,.07), 0 4px 16px rgba(200,120,60,.06);
+}
+
+/* ── MAUVE ── */
+[data-color=“mauve”] {
+–bg:          #f0e4ec;
+–surface-2:   #f0e4ec;
+–ink:         #281420;
+–ink-light:   #6a3858;
+–ink-faint:   #b088a0;
+–rule:        #e0c8d8;
+–accent:      #a8588a;
+–accent-2:    #904070;
+–accent-soft: #f4dcea;
+–baby-a:      #a8588a; –baby-a-soft: #f4dcea;
+–baby-b:      #888ac8; –baby-b-soft: #dcdcf8;
+–baby-c:      #58a0a8; –baby-c-soft: #d4eff0;
+–baby-d:      #c8a058; –baby-d-soft: #f8eed4;
+–breast:      #a8588a; –breast-soft: #f4dcea;
+–bottle:      #58a0a8; –bottle-soft: #d4eff0;
+–shadow:      0 1px 3px rgba(160,60,120,.07), 0 4px 16px rgba(160,60,120,.06);
+}
+
+/* ── DARK MODE base (blush default) ── */
+[data-theme=“dark”] {
+–surface:     #2a1c1c;
+–bg:          #1e1414;
+–surface-2:   #241818;
+–ink:         #f5ece8;
+–ink-light:   #d4a8a8;
+–ink-faint:   #8a6060;
+–rule:        #3d2828;
+–accent:      #e08888;
+–accent-2:    #c87070;
+–accent-soft: #3d2424;
+–baby-a:      #e08888; –baby-a-soft: #3d2424;
+–baby-b:      #b898d8; –baby-b-soft: #2e1e3a;
+–baby-c:      #88aee0; –baby-c-soft: #1e2c3a;
+–baby-d:      #d8b088; –baby-d-soft: #3a2a1e;
+–breast:      #e08888; –breast-soft: #3d2424;
+–bottle:      #88aee0; –bottle-soft: #1e2c3a;
+–shadow:      0 1px 3px rgba(0,0,0,.3), 0 4px 16px rgba(0,0,0,.25);
+}
+[data-theme=“dark”][data-color=“lavender”] {
+–bg: #1a1424; –surface: #231a30; –surface-2: #1e1628;
+–ink-light: #c0a8d8; –ink-faint: #705888;
+–rule: #332248; –accent: #b898d8; –accent-2: #9878c0; –accent-soft: #2e1e3a;
+–baby-a: #b898d8; –baby-a-soft: #2e1e3a;
+–breast: #c898b8; –breast-soft: #3a1e30;
+}
+[data-theme=“dark”][data-color=“sage”] {
+–bg: #141e16; –surface: #1c2a1e; –surface-2: #182218;
+–ink-light: #a0c8a8; –ink-faint: #507058;
+–rule: #223428; –accent: #88c898; –accent-2: #60a878; –accent-soft: #1e3424;
+–baby-a: #88c898; –baby-a-soft: #1e3424;
+–breast: #b0b870; –breast-soft: #303820;
+}
+[data-theme=“dark”][data-color=“peach”] {
+–bg: #1e1610; –surface: #2c2018; –surface-2: #241a14;
+–ink-light: #d8b090; –ink-faint: #886040;
+–rule: #3c2c1c; –accent: #e0a870; –accent-2: #c88850; –accent-soft: #3a2814;
+–baby-a: #e0a870; –baby-a-soft: #3a2814;
+–breast: #d08888; –breast-soft: #3a2020;
+}
+[data-theme=“dark”][data-color=“mauve”] {
+–bg: #1c1018; –surface: #281820; –surface-2: #201418;
+–ink-light: #c8a0b8; –ink-faint: #785068;
+–rule: #382030; –accent: #c878a8; –accent-2: #a85888; –accent-soft: #381828;
+–baby-a: #c878a8; –baby-a-soft: #381828;
+–breast: #c878a8; –breast-soft: #381828;
+}
+
+- { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+font-family: ‘DM Sans’, sans-serif;
+background: #fce8e4;
+color: #2e1f1f;
+transition: background .3s, color .3s;
+min-height: 100vh;
+font-size: 14px;
+line-height: 1.5;
+}
+/* ══════════════════════════════════════════
+LIGHT MODE — page backgrounds
+══════════════════════════════════════════ */
+body, .app-body, .date-nav-wrap, .column { background: #fce8e4; }
+html[data-color=“blush”]    body, html[data-color=“blush”]    .app-body, html[data-color=“blush”]    .date-nav-wrap, html[data-color=“blush”]    .column { background: #fce8e4; }
+html[data-color=“lavender”] body, html[data-color=“lavender”] .app-body, html[data-color=“lavender”] .date-nav-wrap, html[data-color=“lavender”] .column { background: #ede8f7; }
+html[data-color=“sage”]     body, html[data-color=“sage”]     .app-body, html[data-color=“sage”]     .date-nav-wrap, html[data-color=“sage”]     .column { background: #e4ede6; }
+html[data-color=“peach”]    body, html[data-color=“peach”]    .app-body, html[data-color=“peach”]    .date-nav-wrap, html[data-color=“peach”]    .column { background: #fdeee4; }
+html[data-color=“mauve”]    body, html[data-color=“mauve”]    .app-body, html[data-color=“mauve”]    .date-nav-wrap, html[data-color=“mauve”]    .column { background: #f0e4ec; }
+
+/* LIGHT MODE — surface elements */
+.section, .section-header, .section-body,
+.app-header, .date-nav, .multiples-bar,
+.splash-card, .modal-card,
+.export-dropdown, .multiples-dropdown, .theme-dropdown { background: #ffffff; }
+
+/* LIGHT MODE — input backgrounds */
+.field-input, .notes-area, .modal-textarea {
+background: #fce8e4;
+color: #2e1f1f !important;
+-webkit-text-fill-color: #2e1f1f !important;
+}
+html[data-color=“lavender”] .field-input, html[data-color=“lavender”] .notes-area { background: #ede8f7; }
+html[data-color=“sage”]     .field-input, html[data-color=“sage”]     .notes-area { background: #e4ede6; }
+html[data-color=“peach”]    .field-input, html[data-color=“peach”]    .notes-area { background: #fdeee4; }
+html[data-color=“mauve”]    .field-input, html[data-color=“mauve”]    .notes-area { background: #f0e4ec; }
+
+/* ══════════════════════════════════════════
+DARK MODE — body.dark class for max specificity
+══════════════════════════════════════════ */
+
+/* Page backgrounds */
+body.dark, body.dark .app-body, body.dark .date-nav-wrap, body.dark .column { background: #1e1414 !important; color: #f5ece8 !important; }
+html[data-color=“lavender”] body.dark, html[data-color=“lavender”] body.dark .app-body, html[data-color=“lavender”] body.dark .date-nav-wrap, html[data-color=“lavender”] body.dark .column { background: #1a1424 !important; }
+html[data-color=“sage”]     body.dark, html[data-color=“sage”]     body.dark .app-body, html[data-color=“sage”]     body.dark .date-nav-wrap, html[data-color=“sage”]     body.dark .column { background: #141e16 !important; }
+html[data-color=“peach”]    body.dark, html[data-color=“peach”]    body.dark .app-body, html[data-color=“peach”]    body.dark .date-nav-wrap, html[data-color=“peach”]    body.dark .column { background: #1e1610 !important; }
+html[data-color=“mauve”]    body.dark, html[data-color=“mauve”]    body.dark .app-body, html[data-color=“mauve”]    body.dark .date-nav-wrap, html[data-color=“mauve”]    body.dark .column { background: #1c1018 !important; }
+
+/* Surfaces */
+body.dark .section, body.dark .section-header, body.dark .section-body,
+body.dark .app-header, body.dark .date-nav, body.dark .multiples-bar,
+body.dark .modal-card, body.dark .export-dropdown, body.dark .multiples-dropdown,
+body.dark .theme-dropdown { background: #2e2020 !important; }
+
+/* Inputs */
+body.dark .field-input, body.dark .notes-area, body.dark .modal-textarea { background: #3a2626 !important; color: #f5ece8 !important; -webkit-text-fill-color: #f5ece8 !important; border-color: #4a3030 !important; }
+
+/* Text */
+body.dark .section-title, body.dark .col-heading, body.dark .baby-name-display,
+body.dark .date-nav-label, body.dark .app-header h1,
+body.dark .modal-card h3 { color: #f5ece8 !important; -webkit-text-fill-color: #f5ece8 !important; }
+body.dark .field-label, body.dark .empty-state, body.dark .log-time,
+body.dark .energy-label, body.dark .water-label, body.dark .water-goal-label,
+body.dark .diaper-count, body.dark .header-date, body.dark .multiples-question,
+body.dark .modal-card p { color: #9a7070 !important; -webkit-text-fill-color: #9a7070 !important; }
+body.dark .log-details, body.dark .todo-text:not(.done) { color: #d4b0a0 !important; -webkit-text-fill-color: #d4b0a0 !important; }
+body.dark .todo-text.done { color: #6a5050 !important; -webkit-text-fill-color: #6a5050 !important; }
+
+/* Buttons */
+body.dark .feed-type-btn, body.dark .side-btn, body.dark .diaper-btn,
+body.dark .mood-btn, body.dark .energy-dot, body.dark .baby-tab,
+body.dark .water-cup:not(.filled), body.dark .todo-check:not(.done),
+body.dark .water-goal-btn, body.dark .btn-header-icon:not(.dark-toggle),
+body.dark .btn-export-main, body.dark .multiples-btn { background: #3a2828 !important; border-color: #4a3030 !important; color: #d4b0a0 !important; -webkit-text-fill-color: #d4b0a0 !important; }
+body.dark .water-cup.filled { background: #e08888 !important; }
+
+/* Nav */
+body.dark .date-nav-today { color: #e08888 !important; -webkit-text-fill-color: #e08888 !important; }
+body.dark .date-nav > button { color: #d4b0a0 !important; -webkit-text-fill-color: #d4b0a0 !important; }
+
+/* Accents */
+body.dark .summary-chip, body.dark .meal-label-tag { background: #4a2828 !important; color: #e08888 !important; -webkit-text-fill-color: #e08888 !important; }
+body.dark .col-heading { border-bottom-color: #4a3030 !important; }
+body.dark .section-header { border-bottom-color: #4a3030 !important; }
+body.dark .log-entry { background: #2e2020 !important; border-bottom-color: #4a3030 !important; }
+body.dark .todo-item { border-bottom-color: #4a3030 !important; }
+body.dark .privacy-note { color: #6a5050 !important; -webkit-text-fill-color: #6a5050 !important; }
+body.dark .privacy-note strong { color: #9a7070 !important; -webkit-text-fill-color: #9a7070 !important; }
+body.dark .pencil-btn { color: #6a5050 !important; -webkit-text-fill-color: #6a5050 !important; }
+body.dark .app-header h1 span { color: #e08888 !important; }
+body.dark .multiples-option { color: #d4b0a0 !important; -webkit-text-fill-color: #d4b0a0 !important; }
+body.dark .todo-carry-btn { color: #e08888 !important; -webkit-text-fill-color: #e08888 !important; }
+body.dark .export-option { color: #d4b0a0 !important; -webkit-text-fill-color: #d4b0a0 !important; }
+body.dark .log-delete { color: #6a5050 !important; -webkit-text-fill-color: #6a5050 !important; }
+body.dark .btn-cancel { background: #3a2828 !important; border-color: #4a3030 !important; color: #d4b0a0 !important; }
+body.dark .feed-type-btn.active-breast { background: #4a2424 !important; border-color: #e08888 !important; color: #e08888 !important; -webkit-text-fill-color: #e08888 !important; }
+body.dark .mood-btn.selected { background: #4a2828 !important; border-color: #e08888 !important; color: #e08888 !important; -webkit-text-fill-color: #e08888 !important; }
+
+/* ── SPLASH ── */
+.splash-overlay {
+position: fixed; inset: 0; z-index: 9999;
+/* hardcoded so it’s solid before JS/CSS vars resolve */
+background: #fce8e4;
+display: flex; align-items: flex-start; justify-content: center;
+padding: 20px 16px 32px;
+overflow-y: auto;
+-webkit-overflow-scrolling: touch;
+}
+.splash-card {
+background: #ffffff;
+border-radius: 20px;
+box-shadow: 0 4px 40px rgba(180,100,100,0.12);
+max-width: 480px; width: 100%;
+padding: 32px 28px 28px;
+text-align: center;
+margin: auto;
+/* make sure card text is always visible */
+color: #2e1f1f;
+}
+.splash-card h1 {
+font-family: ‘DM Serif Display’, serif; font-size: 24px;
+font-weight: 400; letter-spacing: -0.4px; margin-bottom: 4px;
+color: #2e1f1f !important; -webkit-text-fill-color: #2e1f1f !important;
+}
+.splash-card h1 span { color: #c47a7a !important; }
+.splash-tagline { font-size: 13px; color: #b89c9c !important; -webkit-text-fill-color: #b89c9c !important; margin-bottom: 22px; }
+.splash-features { text-align: left; list-style: none; margin-bottom: 20px; max-width: 360px; margin-left: auto; margin-right: auto; }
+.splash-features li {
+display: flex; align-items: flex-start; gap: 10px;
+font-size: 13px; color: #6b4f4f !important; -webkit-text-fill-color: #6b4f4f !important;
+padding: 6px 0; border-bottom: 1px solid #f0ddd8;
+}
+.splash-features li:last-child { border-bottom: none; }
+.splash-features .icon { font-size: 15px; flex-shrink: 0; margin-top: 1px; }
+.splash-privacy {
+background: #fceee8 !important; border-radius: 10px;
+padding: 11px 13px; font-size: 12px; color: #6b4f4f;
+margin-bottom: 20px; text-align: left; line-height: 1.6;
+}
+.splash-privacy strong { color: #2e1f1f !important; -webkit-text-fill-color: #2e1f1f !important; }
+.splash-start {
+width: 100%; padding: 13px; border-radius: 10px; border: none;
+background: #c47a7a; color: #ffffff;
+font-family: ‘DM Sans’, sans-serif; font-size: 15px; font-weight: 600;
+cursor: pointer; transition: background .15s; letter-spacing: 0.2px;
+}
+.splash-start:hover { background: #b06060; }
+.splash-credit { margin-top: 14px; font-size: 10px; color: #b89c9c !important; -webkit-text-fill-color: #b89c9c !important; letter-spacing: 0.4px; }
+
+/* ── HEADER ── */
+.app-header {
+background: #ffffff;
+border-bottom: 1px solid #f0ddd8;
+padding: 12px 20px 10px; display: flex; align-items: center; gap: 12px;
+position: sticky; top: 0; z-index: 100;
+-webkit-backdrop-filter: none;
+}
+/* app-header handled by surface rules above */
+.app-header h1 { font-family: ‘DM Serif Display’, serif; font-size: 20px; font-weight: 400; letter-spacing: -0.3px; }
+.app-header h1 { color: #2e1f1f !important; -webkit-text-fill-color: #2e1f1f !important; }
+html[data-theme=“dark”] .app-header h1 { color: #f5ece8 !important; -webkit-text-fill-color: #f5ece8 !important; }
+.app-header h1 span { color: #c47a7a !important; }
+.header-right { margin-left: auto; display: flex; align-items: center; gap: 6px; position: relative; }
+.header-date { font-size: 11px; color: #b89c9c !important; font-weight: 300; margin-right: 2px; }
+
+/* single icon-style buttons */
+.btn-header-icon {
+width: 30px; height: 30px; border-radius: 7px; border: 1.5px solid #f0ddd8;
+background: #ffffff; color: #6b4f4f !important; -webkit-text-fill-color: #6b4f4f !important; cursor: pointer; font-size: 13px;
+display: flex; align-items: center; justify-content: center;
+transition: all .15s; flex-shrink: 0;
+}
+.btn-header-icon:hover { border-color: #c47a7a; color: #c47a7a !important; -webkit-text-fill-color: #c47a7a !important; background: #fceee8; }
+
+/* export dropdown */
+.export-wrap { position: relative; }
+.btn-export-main {
+display: flex; align-items: center; gap: 4px;
+padding: 5px 10px; border-radius: 7px; border: 1.5px solid #f0ddd8;
+background: #ffffff; color: #2e1f1f; cursor: pointer;
+font-family: ‘DM Sans’, sans-serif; font-size: 11px; font-weight: 500;
+transition: all .15s; white-space: nowrap; height: 30px;
+}
+.btn-export-main:hover, .btn-export-main.open { border-color: #c47a7a; color: #c47a7a; background: #fceee8; }
+.export-dropdown {
+position: absolute; top: calc(100% + 6px); right: 0;
+background: #ffffff; border-radius: 9px;
+box-shadow: 0 4px 20px rgba(0,0,0,0.12); border: 1px solid var(–rule);
+padding: 5px; z-index: 300; min-width: 150px; display: none;
+}
+.export-dropdown.open { display: block; }
+.export-option {
+display: block; width: 100%; padding: 8px 12px; border: none; background: none;
+text-align: left; font-family: ‘DM Sans’, sans-serif; font-size: 12px;
+color: #6b4f4f !important; -webkit-text-fill-color: #6b4f4f !important; cursor: pointer; border-radius: 6px; transition: background .12s;
+}
+.export-option:hover { background: #fceee8; color: #c47a7a !important; -webkit-text-fill-color: #c47a7a !important; }
+
+/* ── COLOR THEME PICKER ── */
+.theme-picker-wrap { position: relative; }
+.btn-theme-picker {
+width: 30px; height: 30px; border-radius: 50%;
+border: 2px solid #ffffff;
+box-shadow: 0 0 0 1.5px var(–accent), 0 2px 6px rgba(0,0,0,.15);
+background: var(–accent);
+cursor: pointer; transition: transform .15s, box-shadow .15s;
+flex-shrink: 0;
+}
+.btn-theme-picker:hover { transform: scale(1.1); }
+.theme-dropdown {
+position: fixed; top: 56px; right: 12px;
+background: #ffffff; border-radius: 14px;
+box-shadow: 0 6px 28px rgba(0,0,0,.18); border: 1px solid #f0ddd8;
+padding: 12px 14px 14px; z-index: 9000;
+display: none;
+min-width: 220px;
+}
+.theme-dropdown.open { display: block; }
+.theme-dropdown-label {
+font-size: 10px; font-weight: 600; text-transform: uppercase;
+letter-spacing: .8px; color: #b89c9c !important; -webkit-text-fill-color: #b89c9c !important; margin-bottom: 10px;
+}
+.swatches { display: flex; gap: 8px; flex-wrap: wrap; }
+.swatch {
+width: 36px; height: 36px; border-radius: 50%; border: 2.5px solid transparent;
+cursor: pointer; transition: transform .15s, border-color .15s;
+position: relative;
+}
+.swatch:hover { transform: scale(1.12); }
+.swatch.active { border-color: #2e1f1f; }
+/* swatch labels removed — using title attr for tooltip */
+.swatch-blush    { background: #c47a7a; }
+.swatch-lavender { background: #8878c8; }
+.swatch-sage     { background: #6a9e7a; }
+.swatch-peach    { background: #e08850; }
+.swatch-mauve    { background: #a8588a; }
+
+/* ── DARK MODE TOGGLE ── */
+/* dark-toggle styles defined above */
+
+/* ── SMOOTH TRANSITIONS ── */
+body, .section, .app-header, .date-nav, .multiples-bar, .column,
+.modal-card, .export-dropdown, .multiples-dropdown, .field-input, .notes-area,
+.feed-type-btn, .side-btn, .mood-btn, .baby-tab, .diaper-btn, .btn-export-main,
+.btn-header-icon, .modal-textarea, .water-cup, .todo-check {
+transition: background .25s, border-color .25s, color .25s, box-shadow .25s;
+}
+
+/* ── LAYOUT ── */
+.app-body { display: grid; grid-template-columns: 1fr 1fr; max-width: 1100px; margin: 0 auto; background: #fce8e4; }
+@media (max-width: 700px) { .app-body { grid-template-columns: 1fr; } }
+.column { padding: 24px 20px; border-right: 1px solid var(–rule); background: #fce8e4; }
+.column:last-child { border-right: none; }
+
+/* ── SECTIONS ── */
+.section { background: #ffffff; border-radius: 12px; box-shadow: var(–shadow); margin-bottom: 16px; overflow: hidden; }
+.section-header { padding: 12px 16px 10px; border-bottom: 1px solid #f0ddd8; display: flex; align-items: center; gap: 8px; background: #ffffff; }
+.section-title { font-family: ‘DM Serif Display’, serif; font-size: 14px; font-weight: 400; letter-spacing: -0.2px; color: var(–ink) !important; -webkit-text-fill-color: var(–ink) !important; }
+.section-body { padding: 14px 16px; background: #ffffff; color: #2e1f1f; }
+
+/* ── DATE NAV + MULTIPLES ── */
+.date-nav-wrap { max-width: 1100px; margin: 0 auto; padding: 16px 20px 0; background: #fce8e4; }
+.date-nav {
+display: flex; align-items: center; background: var(–warm-white);
+border-radius: var(–radius); box-shadow: var(–shadow); overflow: hidden; margin-bottom: 10px; background: #ffffff;
+}
+.date-nav > button { background: transparent; border: none; padding: 10px 14px; cursor: pointer; color: #6b4f4f !important; -webkit-text-fill-color: #6b4f4f !important; font-size: 16px; transition: background .15s; }
+.date-nav > button:hover { background: #fceee8; }
+.date-nav-label { flex: 1; text-align: center; font-family: ‘DM Serif Display’, serif; font-size: 15px; color: var(–ink) !important; -webkit-text-fill-color: var(–ink) !important; }
+.date-nav-today { font-size: 11px; color: #c47a7a !important; -webkit-text-fill-color: #c47a7a !important; cursor: pointer; padding: 10px 12px; border: none; background: transparent; font-family: ‘DM Sans’, sans-serif; font-weight: 500; }
+.date-nav-today:hover { text-decoration: underline; }
+
+/* ── MULTIPLES BAR ── */
+.multiples-bar {
+display: flex; align-items: center; gap: 10px;
+padding: 9px 14px; margin-bottom: 16px;
+background: #ffffff; border-radius: var(–radius); box-shadow: var(–shadow);
+position: relative;
+}
+.multiples-question { font-size: 12px; color: #b89c9c !important; -webkit-text-fill-color: #b89c9c !important; flex: 1; }
+.multiples-question strong { color: #6b4f4f; font-weight: 500; }
+.multiples-btn {
+font-size: 12px; padding: 5px 12px; border-radius: 20px;
+border: 1.5px solid #f0ddd8; background: #ffffff; color: #6b4f4f !important; -webkit-text-fill-color: #6b4f4f !important;
+cursor: pointer; font-family: ‘DM Sans’, sans-serif; font-weight: 500;
+transition: all .15s; display: flex; align-items: center; gap: 4px;
+}
+.multiples-btn:hover, .multiples-btn.open { border-color: #c47a7a; color: #c47a7a !important; -webkit-text-fill-color: #c47a7a !important; background: #fceee8; }
+.multiples-dropdown {
+position: absolute; top: calc(100% + 6px); right: 12px;
+background: #ffffff; border-radius: 10px;
+box-shadow: 0 4px 20px rgba(0,0,0,0.12); border: 1px solid var(–rule);
+padding: 6px; z-index: 200; min-width: 180px; display: none;
+}
+.multiples-dropdown.open { display: block; }
+.multiples-option {
+display: block; width: 100%; padding: 8px 12px; border: none; background: none;
+text-align: left; font-family: ‘DM Sans’, sans-serif; font-size: 13px;
+color: #6b4f4f !important; -webkit-text-fill-color: #6b4f4f !important; cursor: pointer; border-radius: 7px; transition: background .12s;
+}
+.multiples-option:hover { background: #fceee8; color: #c47a7a; }
+.multiples-option.selected { background: #fceee8; color: #c47a7a; font-weight: 500; }
+
+/* ── BABY TABS ── */
+.baby-tabs { display: flex; gap: 6px; margin-bottom: 10px; flex-wrap: wrap; }
+.baby-tab {
+flex: 1; min-width: 72px; padding: 7px 8px; border-radius: 7px; border: 1.5px solid #f0ddd8;
+background: none; font-family: ‘DM Sans’, sans-serif; font-size: 13px; font-weight: 500;
+cursor: pointer; transition: all .15s; color: #6b4f4f; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+}
+.baby-tab { background: #ffffff; border-color: #f0ddd8; color: #6b4f4f !important; -webkit-text-fill-color: #6b4f4f !important; }
+.baby-tab.tab-a { background: #fceee8 !important; border-color: #c47a7a !important; color: #c47a7a !important; -webkit-text-fill-color: #c47a7a !important; }
+.baby-tab.tab-b { background: #f3ecfa !important; border-color: #a07ab8 !important; color: #804a98 !important; -webkit-text-fill-color: #804a98 !important; }
+.baby-tab.tab-c { background: #e8f2fa !important; border-color: #7a9ec4 !important; color: #4a7da4 !important; -webkit-text-fill-color: #4a7da4 !important; }
+.baby-tab.tab-d { background: #faf0e8 !important; border-color: #c49a7a !important; color: #a47850 !important; -webkit-text-fill-color: #a47850 !important; }
+
+/* ── BABY NAME ROW ── */
+.baby-name-row { display: flex; align-items: center; gap: 6px; margin-bottom: 14px; }
+.baby-name-display { font-family: ‘DM Serif Display’, serif; font-size: 15px; color: #2e1f1f !important; -webkit-text-fill-color: #2e1f1f !important; }
+.baby-name-input {
+font-family: ‘DM Serif Display’, serif; font-size: 15px; color: #2e1f1f !important;
+-webkit-text-fill-color: #2e1f1f !important;
+border: none; border-bottom: 1.5px solid #c47a7a; background: #ffffff !important;
+outline: none; width: 180px; padding: 2px 6px; border-radius: 4px 4px 0 0;
+}
+.pencil-btn {
+background: none; border: none; cursor: pointer; color: #b89c9c !important; -webkit-text-fill-color: #b89c9c !important;
+font-size: 13px; padding: 2px 4px; border-radius: 4px; transition: all .15s; line-height: 1;
+}
+.pencil-btn:hover { color: #c47a7a !important; -webkit-text-fill-color: #c47a7a !important; background: #fceee8; }
+
+/* ── FORM FIELDS ── */
+.feed-form { display: flex; flex-direction: column; gap: 10px; margin-bottom: 12px; }
+.feed-form .full { width: 100%; }
+.feed-form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+.feed-form-row > * { min-width: 0; } /* prevent grid blowout */
+.feed-form .full { grid-column: 1/-1; }
+.field-label { font-size: 11px; font-weight: 500; color: #b89c9c !important; -webkit-text-fill-color: #b89c9c !important; text-transform: uppercase; letter-spacing: 0.6px; display: block; margin-bottom: 4px; }
+.field-input {
+width: 100%; min-width: 0; box-sizing: border-box;
+padding: 7px 10px; border: 1.5px solid #f0ddd8; border-radius: 7px;
+font-family: ‘DM Sans’, sans-serif; font-size: 13px;
+background: #fce8e4 !important; color: #2e1f1f !important;
+-webkit-text-fill-color: #2e1f1f !important;
+outline: none; transition: border-color .15s;
+}
+.field-input:focus { border-color: #c47a7a !important; background: #ffffff !important; }
+select.field-input { cursor: pointer; }
+
+.feed-type-btns, .side-btns { display: flex; gap: 6px; }
+.feed-type-btn, .side-btn {
+flex: 1; padding: 7px 6px; border-radius: 7px; border: 1.5px solid #f0ddd8;
+background: #ffffff; font-family: ‘DM Sans’, sans-serif; font-size: 12px; font-weight: 500;
+cursor: pointer; transition: all .15s; color: #6b4f4f !important; -webkit-text-fill-color: #6b4f4f !important;
+}
+.feed-type-btn.active-breast { background: #fceee8 !important; border-color: #c47a7a !important; color: #9a5555 !important; -webkit-text-fill-color: #9a5555 !important; }
+.feed-type-btn.active-bottle { background: #e8f2fa !important; border-color: #7a9ec4 !important; color: #4a7d94 !important; -webkit-text-fill-color: #4a7d94 !important; }
+.side-btn.active { background: #fceee8 !important; border-color: #c47a7a !important; color: #9a5555 !important; -webkit-text-fill-color: #9a5555 !important; }
+
+.btn-primary {
+width: 100%; padding: 9px; border-radius: 7px; border: none; background: #c47a7a;
+color: #ffffff !important; -webkit-text-fill-color: #ffffff !important;
+font-family: ‘DM Sans’, sans-serif; font-size: 13px; font-weight: 500;
+cursor: pointer; transition: background .15s; margin-top: 4px;
+}
+.btn-primary:hover { background: #b06060; }
+.btn-primary.c-a { background: #c47a7a; } .btn-primary.c-a:hover { background: #b06060; }
+.btn-primary.c-b { background: #a07ab8; } .btn-primary.c-b:hover { background: #8a60a0; }
+.btn-primary.c-c { background: #7a9ec4; } .btn-primary.c-c:hover { background: #6080a8; }
+.btn-primary.c-d { background: #c49a7a; } .btn-primary.c-d:hover { background: #a07858; }
+
+/* ── LOG ENTRIES ── */
+.feed-log { max-height: 280px; overflow-y: auto; }
+.feed-log::-webkit-scrollbar { width: 4px; }
+.feed-log::-webkit-scrollbar-thumb { background: #f0ddd8; border-radius: 4px; }
+.log-entry { display: flex; align-items: flex-start; gap: 10px; padding: 9px 0; border-bottom: 1px solid #f0ddd8; background: #ffffff; width: 100%; box-sizing: border-box; }
+.log-entry:last-child { border-bottom: none; }
+.log-time { font-size: 11px; color: #b89c9c !important; -webkit-text-fill-color: #b89c9c !important; min-width: 36px; padding-top: 1px; }
+.log-badge { font-size: 10px; font-weight: 600; padding: 2px 7px; border-radius: 20px; text-transform: uppercase; letter-spacing: 0.4px; white-space: nowrap; }
+.badge-breast { background: #fceee8; color: #9a5555; }
+.badge-bottle { background: #e8f2fa; color: #4a7d94; }
+.badge-a { background: #fceee8; color: #c47a7a; }
+.badge-b { background: #f3ecfa; color: #804a98; }
+.badge-c { background: #e8f2fa; color: #4a7da4; }
+.badge-d { background: #faf0e8; color: #a47850; }
+.log-details { flex: 1; font-size: 12px; color: #6b4f4f; }
+.log-delete { background: none; border: none; color: #b89c9c !important; -webkit-text-fill-color: #b89c9c !important; cursor: pointer; padding: 2px 4px; font-size: 14px; line-height: 1; border-radius: 4px; transition: all .15s; }
+.log-delete:hover { background: #fee; color: #c44 !important; -webkit-text-fill-color: #c44 !important; }
+
+.summary-strip { display: flex; gap: 8px; flex-wrap: wrap; padding: 10px 0 4px; }
+.summary-chip { font-size: 11px; padding: 3px 9px; border-radius: 20px; background: #fceee8; color: #c47a7a; font-weight: 500; }
+
+/* ── DIAPER ── */
+.diaper-row { display: flex; align-items: center; gap: 10px; margin-bottom: 10px; flex-wrap: wrap; }
+.diaper-btn { padding: 6px 14px; border-radius: 20px; border: 1.5px solid #f0ddd8; background: #ffffff; font-family: ‘DM Sans’, sans-serif; font-size: 12px; font-weight: 500; cursor: pointer; transition: all .15s; color: #6b4f4f !important; -webkit-text-fill-color: #6b4f4f !important; }
+.diaper-btn:hover { border-color: #c47a7a; }
+.diaper-count { font-size: 11px; color: #b89c9c !important; -webkit-text-fill-color: #b89c9c !important; }
+.diaper-count strong { color: #2e1f1f !important; -webkit-text-fill-color: #2e1f1f !important; }
+
+/* ── WATER ── */
+.water-tracker { display: flex; align-items: center; gap: 10px; margin-bottom: 10px; }
+.water-cups { display: flex; gap: 4px; flex-wrap: wrap; }
+.water-cup { width: 22px; height: 22px; border-radius: 4px; border: 1.5px solid #c47a7a; background: #ffffff; cursor: pointer; transition: all .15s; }
+.water-cup.filled,
+button.water-cup.filled { background: #c47a7a !important; border-color: #c47a7a !important; }
+.water-label { font-size: 11px; color: #b89c9c !important; margin-left: 4px; }
+
+/* ── MEALS ── */
+.meal-row { display: flex; gap: 8px; margin-bottom: 8px; align-items: center; }
+.meal-label-tag { font-size: 11px; font-weight: 500; padding: 5px 8px; border-radius: 6px; background: #fceee8 !important; color: #c47a7a !important; -webkit-text-fill-color: #c47a7a !important; white-space: nowrap; min-width: 60px; text-align: center; align-self: center; }
+
+/* ── MOOD ── */
+.mood-row { display: flex; gap: 6px; flex-wrap: wrap; }
+.mood-btn { padding: 6px 12px; border-radius: 20px; border: 1.5px solid #f0ddd8; background: #ffffff; font-family: ‘DM Sans’, sans-serif; font-size: 12px; cursor: pointer; transition: all .15s; color: #6b4f4f !important; -webkit-text-fill-color: #6b4f4f !important; }
+.mood-btn.selected { border-color: #c47a7a !important; background: #fceee8 !important; color: #c47a7a !important; -webkit-text-fill-color: #c47a7a !important; font-weight: 500; }
+.energy-row { display: flex; gap: 4px; align-items: center; margin-top: 10px; }
+.energy-dot { width: 28px; height: 28px; border-radius: 50%; border: 1.5px solid #f0ddd8; background: #ffffff; cursor: pointer; transition: all .15s; font-size: 11px; font-weight: 600; color: #b89c9c !important; -webkit-text-fill-color: #b89c9c !important; display: flex; align-items: center; justify-content: center; }
+.energy-dot.s1 { background: #f0e8e8 !important; border-color: #d4a0a0 !important; color: #9a6060 !important; -webkit-text-fill-color: #9a6060 !important; }
+.energy-dot.s2 { background: #f5efe0 !important; border-color: #c9a870 !important; color: #8a7040 !important; -webkit-text-fill-color: #8a7040 !important; }
+.energy-dot.s3 { background: #e8f0e7 !important; border-color: #9db89a !important; color: #507050 !important; -webkit-text-fill-color: #507050 !important; }
+.energy-dot.s4 { background: #e8f2f7 !important; border-color: #8fb5c8 !important; color: #407090 !important; -webkit-text-fill-color: #407090 !important; }
+.energy-dot.s5 { background: #fceee8 !important; border-color: #c47a7a !important; color: #c47a7a !important; -webkit-text-fill-color: #c47a7a !important; }
+.energy-label { font-size: 11px; color: #b89c9c !important; -webkit-text-fill-color: #b89c9c !important; margin-left: 6px; }
+
+/* ── NAP ── */
+.nap-row { display: flex; gap: 6px; margin-bottom: 8px; align-items: flex-end; flex-wrap: wrap; }
+.nap-row .field-group { flex: 1; min-width: 80px; }
+.nap-grid > * { min-width: 0; } /* prevent grid blowout on iOS */
+
+/* ── TODO ── */
+.todo-input-row { display: flex; gap: 8px; margin-bottom: 10px; }
+.todo-input-row .field-input { flex: 1; }
+.btn-add { padding: 7px 14px; border-radius: 7px; border: none; background: #c47a7a; color: #ffffff !important; -webkit-text-fill-color: #ffffff !important; font-family: ‘DM Sans’, sans-serif; font-size: 13px; font-weight: 500; cursor: pointer; transition: background .15s; white-space: nowrap; }
+.btn-add:hover { background: #b06060; }
+.todo-list { list-style: none; }
+.todo-item { display: flex; align-items: center; gap: 9px; padding: 7px 0; border-bottom: 1px solid #f0ddd8; }
+.todo-item:last-child { border-bottom: none; }
+.todo-check { width: 16px; height: 16px; border-radius: 4px; border: 1.5px solid #f0ddd8; cursor: pointer; flex-shrink: 0; display: flex; align-items: center; justify-content: center; transition: all .15s; background: none; }
+.todo-check.done { background: #c47a7a !important; border-color: #c47a7a !important; }
+.todo-check.done::after { content: ‘✓’; font-size: 10px; color: white; font-weight: 700; }
+.todo-text { flex: 1; font-size: 13px; color: #2e1f1f !important; -webkit-text-fill-color: #2e1f1f !important; }
+.todo-text.done { text-decoration: line-through; color: #b89c9c !important; -webkit-text-fill-color: #b89c9c !important; }
+
+/* ── NOTES ── */
+.notes-area { display: block; box-sizing: border-box; width: 100%; max-width: 100%; min-height: 90px; border: 1.5px solid #f0ddd8; border-radius: 7px; padding: 10px; font-family: ‘DM Sans’, sans-serif; font-size: 13px; color: #2e1f1f !important; -webkit-text-fill-color: #2e1f1f !important; background: #ffffff !important; resize: vertical; outline: none; line-height: 1.6; overflow-x: hidden; }
+.notes-area:focus { border-color: #c47a7a; }
+
+/* ── COL HEADING ── */
+.col-heading { font-family: ‘DM Serif Display’, serif; font-size: 17px; font-weight: 400; color: #2e1f1f !important; -webkit-text-fill-color: #2e1f1f !important; margin-bottom: 14px; padding-bottom: 10px; border-bottom: 1px solid #f0ddd8; display: flex; align-items: center; gap: 10px; }
+.col-heading .dot {
+display: inline-block; width: 8px; height: 8px; border-radius: 50%;
+flex-shrink: 0; background: #c47a7a; overflow: hidden;
+font-size: 0; line-height: 0; /* prevent any text rendering */
+}
+
+/* ── MISC ── */
+.empty-state { text-align: center; padding: 20px; color: #b89c9c !important; -webkit-text-fill-color: #b89c9c !important; font-size: 12px; font-style: italic; }
+.hidden { display: none !important; }
+.privacy-note { text-align: center; font-size: 11px; color: #b89c9c; padding: 12px 20px 20px; }
+.privacy-note strong { color: #6b4f4f; }
+
+/* ── COLOR THEME PICKER ── */
+.theme-picker-wrap { position: relative; }
+.btn-theme-picker {
+width: 30px; height: 30px; border-radius: 50%;
+border: 2px solid #ffffff;
+box-shadow: 0 0 0 1.5px var(–accent), 0 2px 6px rgba(0,0,0,.15);
+background: var(–accent);
+cursor: pointer; transition: transform .15s, box-shadow .15s;
+flex-shrink: 0;
+}
+.btn-theme-picker:hover { transform: scale(1.1); }
+.theme-dropdown {
+position: fixed; top: 56px; right: 12px;
+background: #ffffff; border-radius: 14px;
+box-shadow: 0 6px 28px rgba(0,0,0,.18); border: 1px solid #f0ddd8;
+padding: 12px 14px 14px; z-index: 9000;
+display: none;
+min-width: 220px;
+}
+.theme-dropdown.open { display: block; }
+.theme-dropdown-label {
+font-size: 10px; font-weight: 600; text-transform: uppercase;
+letter-spacing: .8px; color: #b89c9c !important; -webkit-text-fill-color: #b89c9c !important; margin-bottom: 10px;
+}
+.swatches { display: flex; gap: 8px; flex-wrap: wrap; }
+.swatch {
+width: 36px; height: 36px; border-radius: 50%; border: 2.5px solid transparent;
+cursor: pointer; transition: transform .15s, border-color .15s;
+position: relative;
+}
+.swatch:hover { transform: scale(1.12); }
+.swatch.active { border-color: #2e1f1f; }
+/* swatch labels removed — using title attr for tooltip */
+.swatch-blush    { background: #c47a7a; }
+.swatch-lavender { background: #8878c8; }
+.swatch-sage     { background: #6a9e7a; }
+.swatch-peach    { background: #e08850; }
+.swatch-mauve    { background: #a8588a; }
+
+/* ── DARK MODE TOGGLE ── */
+.dark-toggle { font-size: 16px; border: none !important; background: transparent !important; box-shadow: none !important; width: 32px; height: 32px; }
+[data-theme=“dark”] .dark-toggle { content: ‘☀️’; }
+
+/* ── SMOOTH TRANSITIONS ── */
+.section, .app-header, .date-nav, .multiples-bar, .column, .splash-card, .modal-card,
+.export-dropdown, .multiples-dropdown, .feed-type-btn, .side-btn, .mood-btn,
+.baby-tab, .diaper-btn, .btn-export-main, .btn-header-icon, .field-input, .notes-area {
+transition: background .25s, border-color .25s, color .25s;
+}
+
+/* ── TOAST NOTIFICATION ── */
+.toast {
+position: fixed; bottom: 24px; left: 50%; transform: translateX(-50%) translateY(20px);
+background: #2e1f1f; color: #fff; padding: 10px 20px; border-radius: 24px;
+font-size: 13px; font-weight: 500; z-index: 9000;
+opacity: 0; transition: opacity .25s, transform .25s; pointer-events: none;
+white-space: nowrap; box-shadow: 0 4px 16px rgba(0,0,0,.2);
+}
+.toast.show { opacity: 1; transform: translateX(-50%) translateY(0); }
+.toast.error { background: #c44; }
+
+/* ── STORAGE WARNING ── */
+.storage-warning {
+background: #fff3cd; border: 1px solid #f0c040; border-radius: 8px;
+padding: 8px 12px; font-size: 12px; color: #7a5800; margin-bottom: 10px;
+}<!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Postpartum Daily Planner</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:wght@300;400;500&display=swap');
+
+/* ══════════════════════════════════
+COLOR THEMES  (light base vars)
+Each theme defines: bg, surface, surface-2,
+ink, ink-light, ink-faint, rule,
+accent, accent-2, accent-soft,
+baby-a/b/c/d + soft, breast+soft, bottle+soft,
+shadow
+══════════════════════════════════ */
+
+/* shared non-color vars */
+:root { –radius: 12px; –surface: #ffffff; }
+
+/* ── BLUSH (default) ── */
+:root, [data-color=“blush”] {
+–bg:          #fce8e4;
+–surface-2:   #fce8e4;
+–ink:         #2e1f1f;
+–ink-light:   #6b4f4f;
+–ink-faint:   #b89c9c;
+–rule:        #f0ddd8;
+–accent:      #c47a7a;
+–accent-2:    #c46a5a;
+–accent-soft: #fceee8;
+–baby-a:      #c47a7a; –baby-a-soft: #fceee8;
+–baby-b:      #a07ab8; –baby-b-soft: #f3ecfa;
+–baby-c:      #7a9ec4; –baby-c-soft: #e8f2fa;
+–baby-d:      #c49a7a; –baby-d-soft: #faf0e8;
+–breast:      #c47a7a; –breast-soft: #fceee8;
+–bottle:      #7a9ec4; –bottle-soft: #e8f2fa;
+–shadow:      0 1px 3px rgba(180,100,100,.07), 0 4px 16px rgba(180,100,100,.06);
+}
+
+/* ── LAVENDER ── */
+[data-color=“lavender”] {
+–bg:          #ede8f7;
+–surface-2:   #ede8f7;
+–ink:         #1e1a2e;
+–ink-light:   #4e4870;
+–ink-faint:   #9e98c0;
+–rule:        #ddd8f0;
+–accent:      #8878c8;
+–accent-2:    #7060b0;
+–accent-soft: #e8e4f8;
+–baby-a:      #8878c8; –baby-a-soft: #e8e4f8;
+–baby-b:      #c878a8; –baby-b-soft: #f8e4f0;
+–baby-c:      #78a8c8; –baby-c-soft: #e4f0f8;
+–baby-d:      #a898d8; –baby-d-soft: #ece8fc;
+–breast:      #c878a8; –breast-soft: #f8e4f0;
+–bottle:      #78a8c8; –bottle-soft: #e4f0f8;
+–shadow:      0 1px 3px rgba(100,80,180,.07), 0 4px 16px rgba(100,80,180,.06);
+}
+
+/* ── SAGE ── */
+[data-color=“sage”] {
+–bg:          #e4ede6;
+–surface-2:   #e4ede6;
+–ink:         #1a2a1e;
+–ink-light:   #456050;
+–ink-faint:   #90afa0;
+–rule:        #ccddd0;
+–accent:      #6a9e7a;
+–accent-2:    #508868;
+–accent-soft: #ddeee2;
+–baby-a:      #6a9e7a; –baby-a-soft: #ddeee2;
+–baby-b:      #9e8a6a; –baby-b-soft: #f0ead8;
+–baby-c:      #6a8a9e; –baby-c-soft: #d8e8f0;
+–baby-d:      #8a9e6a; –baby-d-soft: #e2eedd;
+–breast:      #9e8a6a; –breast-soft: #f0ead8;
+–bottle:      #6a8a9e; –bottle-soft: #d8e8f0;
+–shadow:      0 1px 3px rgba(80,140,100,.07), 0 4px 16px rgba(80,140,100,.06);
+}
+
+/* ── PEACH ── */
+[data-color=“peach”] {
+–bg:          #fdeee4;
+–surface-2:   #fdeee4;
+–ink:         #2e1e10;
+–ink-light:   #7a5038;
+–ink-faint:   #c0a090;
+–rule:        #f5dac8;
+–accent:      #e08850;
+–accent-2:    #c87038;
+–accent-soft: #fde8d8;
+–baby-a:      #e08850; –baby-a-soft: #fde8d8;
+–baby-b:      #c87888; –baby-b-soft: #fde0e4;
+–baby-c:      #88a8c8; –baby-c-soft: #dceaf8;
+–baby-d:      #d8a878; –baby-d-soft: #fce8d4;
+–breast:      #c87888; –breast-soft: #fde0e4;
+–bottle:      #88a8c8; –bottle-soft: #dceaf8;
+–shadow:      0 1px 3px rgba(200,120,60,.07), 0 4px 16px rgba(200,120,60,.06);
+}
+
+/* ── MAUVE ── */
+[data-color=“mauve”] {
+–bg:          #f0e4ec;
+–surface-2:   #f0e4ec;
+–ink:         #281420;
+–ink-light:   #6a3858;
+–ink-faint:   #b088a0;
+–rule:        #e0c8d8;
+–accent:      #a8588a;
+–accent-2:    #904070;
+–accent-soft: #f4dcea;
+–baby-a:      #a8588a; –baby-a-soft: #f4dcea;
+–baby-b:      #888ac8; –baby-b-soft: #dcdcf8;
+–baby-c:      #58a0a8; –baby-c-soft: #d4eff0;
+–baby-d:      #c8a058; –baby-d-soft: #f8eed4;
+–breast:      #a8588a; –breast-soft: #f4dcea;
+–bottle:      #58a0a8; –bottle-soft: #d4eff0;
+–shadow:      0 1px 3px rgba(160,60,120,.07), 0 4px 16px rgba(160,60,120,.06);
+}
+
+/* ── DARK MODE base (blush default) ── */
+[data-theme=“dark”] {
+–surface:     #2a1c1c;
+–bg:          #1e1414;
+–surface-2:   #241818;
+–ink:         #f5ece8;
+–ink-light:   #d4a8a8;
+–ink-faint:   #8a6060;
+–rule:        #3d2828;
+–accent:      #e08888;
+–accent-2:    #c87070;
+–accent-soft: #3d2424;
+–baby-a:      #e08888; –baby-a-soft: #3d2424;
+–baby-b:      #b898d8; –baby-b-soft: #2e1e3a;
+–baby-c:      #88aee0; –baby-c-soft: #1e2c3a;
+–baby-d:      #d8b088; –baby-d-soft: #3a2a1e;
+–breast:      #e08888; –breast-soft: #3d2424;
+–bottle:      #88aee0; –bottle-soft: #1e2c3a;
+–shadow:      0 1px 3px rgba(0,0,0,.3), 0 4px 16px rgba(0,0,0,.25);
+}
+[data-theme=“dark”][data-color=“lavender”] {
+–bg: #1a1424; –surface: #231a30; –surface-2: #1e1628;
+–ink-light: #c0a8d8; –ink-faint: #705888;
+–rule: #332248; –accent: #b898d8; –accent-2: #9878c0; –accent-soft: #2e1e3a;
+–baby-a: #b898d8; –baby-a-soft: #2e1e3a;
+–breast: #c898b8; –breast-soft: #3a1e30;
+}
+[data-theme=“dark”][data-color=“sage”] {
+–bg: #141e16; –surface: #1c2a1e; –surface-2: #182218;
+–ink-light: #a0c8a8; –ink-faint: #507058;
+–rule: #223428; –accent: #88c898; –accent-2: #60a878; –accent-soft: #1e3424;
+–baby-a: #88c898; –baby-a-soft: #1e3424;
+–breast: #b0b870; –breast-soft: #303820;
+}
+[data-theme=“dark”][data-color=“peach”] {
+–bg: #1e1610; –surface: #2c2018; –surface-2: #241a14;
+–ink-light: #d8b090; –ink-faint: #886040;
+–rule: #3c2c1c; –accent: #e0a870; –accent-2: #c88850; –accent-soft: #3a2814;
+–baby-a: #e0a870; –baby-a-soft: #3a2814;
+–breast: #d08888; –breast-soft: #3a2020;
+}
+[data-theme=“dark”][data-color=“mauve”] {
+–bg: #1c1018; –surface: #281820; –surface-2: #201418;
+–ink-light: #c8a0b8; –ink-faint: #785068;
+–rule: #382030; –accent: #c878a8; –accent-2: #a85888; –accent-soft: #381828;
+–baby-a: #c878a8; –baby-a-soft: #381828;
+–breast: #c878a8; –breast-soft: #381828;
+}
+
+- { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+font-family: ‘DM Sans’, sans-serif;
+background: #fce8e4;
+color: #2e1f1f;
+transition: background .3s, color .3s;
+min-height: 100vh;
+font-size: 14px;
+line-height: 1.5;
+}
+/* ══════════════════════════════════════════
+LIGHT MODE — page backgrounds
+══════════════════════════════════════════ */
+body, .app-body, .date-nav-wrap, .column { background: #fce8e4; }
+html[data-color=“blush”]    body, html[data-color=“blush”]    .app-body, html[data-color=“blush”]    .date-nav-wrap, html[data-color=“blush”]    .column { background: #fce8e4; }
+html[data-color=“lavender”] body, html[data-color=“lavender”] .app-body, html[data-color=“lavender”] .date-nav-wrap, html[data-color=“lavender”] .column { background: #ede8f7; }
+html[data-color=“sage”]     body, html[data-color=“sage”]     .app-body, html[data-color=“sage”]     .date-nav-wrap, html[data-color=“sage”]     .column { background: #e4ede6; }
+html[data-color=“peach”]    body, html[data-color=“peach”]    .app-body, html[data-color=“peach”]    .date-nav-wrap, html[data-color=“peach”]    .column { background: #fdeee4; }
+html[data-color=“mauve”]    body, html[data-color=“mauve”]    .app-body, html[data-color=“mauve”]    .date-nav-wrap, html[data-color=“mauve”]    .column { background: #f0e4ec; }
+
+/* LIGHT MODE — surface elements */
+.section, .section-header, .section-body,
+.app-header, .date-nav, .multiples-bar,
+.splash-card, .modal-card,
+.export-dropdown, .multiples-dropdown, .theme-dropdown { background: #ffffff; }
+
+/* LIGHT MODE — input backgrounds */
+.field-input, .notes-area, .modal-textarea {
+background: #fce8e4;
+color: #2e1f1f !important;
+-webkit-text-fill-color: #2e1f1f !important;
+}
+html[data-color=“lavender”] .field-input, html[data-color=“lavender”] .notes-area { background: #ede8f7; }
+html[data-color=“sage”]     .field-input, html[data-color=“sage”]     .notes-area { background: #e4ede6; }
+html[data-color=“peach”]    .field-input, html[data-color=“peach”]    .notes-area { background: #fdeee4; }
+html[data-color=“mauve”]    .field-input, html[data-color=“mauve”]    .notes-area { background: #f0e4ec; }
+
+/* ══════════════════════════════════════════
+DARK MODE — body.dark class for max specificity
+══════════════════════════════════════════ */
+
+/* Page backgrounds */
+body.dark, body.dark .app-body, body.dark .date-nav-wrap, body.dark .column { background: #1e1414 !important; color: #f5ece8 !important; }
+html[data-color=“lavender”] body.dark, html[data-color=“lavender”] body.dark .app-body, html[data-color=“lavender”] body.dark .date-nav-wrap, html[data-color=“lavender”] body.dark .column { background: #1a1424 !important; }
+html[data-color=“sage”]     body.dark, html[data-color=“sage”]     body.dark .app-body, html[data-color=“sage”]     body.dark .date-nav-wrap, html[data-color=“sage”]     body.dark .column { background: #141e16 !important; }
+html[data-color=“peach”]    body.dark, html[data-color=“peach”]    body.dark .app-body, html[data-color=“peach”]    body.dark .date-nav-wrap, html[data-color=“peach”]    body.dark .column { background: #1e1610 !important; }
+html[data-color=“mauve”]    body.dark, html[data-color=“mauve”]    body.dark .app-body, html[data-color=“mauve”]    body.dark .date-nav-wrap, html[data-color=“mauve”]    body.dark .column { background: #1c1018 !important; }
+
+/* Surfaces */
+body.dark .section, body.dark .section-header, body.dark .section-body,
+body.dark .app-header, body.dark .date-nav, body.dark .multiples-bar,
+body.dark .modal-card, body.dark .export-dropdown, body.dark .multiples-dropdown,
+body.dark .theme-dropdown { background: #2e2020 !important; }
+
+/* Inputs */
+body.dark .field-input, body.dark .notes-area, body.dark .modal-textarea { background: #3a2626 !important; color: #f5ece8 !important; -webkit-text-fill-color: #f5ece8 !important; border-color: #4a3030 !important; }
+
+/* Text */
+body.dark .section-title, body.dark .col-heading, body.dark .baby-name-display,
+body.dark .date-nav-label, body.dark .app-header h1,
+body.dark .modal-card h3 { color: #f5ece8 !important; -webkit-text-fill-color: #f5ece8 !important; }
+body.dark .field-label, body.dark .empty-state, body.dark .log-time,
+body.dark .energy-label, body.dark .water-label, body.dark .water-goal-label,
+body.dark .diaper-count, body.dark .header-date, body.dark .multiples-question,
+body.dark .modal-card p { color: #9a7070 !important; -webkit-text-fill-color: #9a7070 !important; }
+body.dark .log-details, body.dark .todo-text:not(.done) { color: #d4b0a0 !important; -webkit-text-fill-color: #d4b0a0 !important; }
+body.dark .todo-text.done { color: #6a5050 !important; -webkit-text-fill-color: #6a5050 !important; }
+
+/* Buttons */
+body.dark .feed-type-btn, body.dark .side-btn, body.dark .diaper-btn,
+body.dark .mood-btn, body.dark .energy-dot, body.dark .baby-tab,
+body.dark .water-cup:not(.filled), body.dark .todo-check:not(.done),
+body.dark .water-goal-btn, body.dark .btn-header-icon:not(.dark-toggle),
+body.dark .btn-export-main, body.dark .multiples-btn { background: #3a2828 !important; border-color: #4a3030 !important; color: #d4b0a0 !important; -webkit-text-fill-color: #d4b0a0 !important; }
+body.dark .water-cup.filled { background: #e08888 !important; }
+
+/* Nav */
+body.dark .date-nav-today { color: #e08888 !important; -webkit-text-fill-color: #e08888 !important; }
+body.dark .date-nav > button { color: #d4b0a0 !important; -webkit-text-fill-color: #d4b0a0 !important; }
+
+/* Accents */
+body.dark .summary-chip, body.dark .meal-label-tag { background: #4a2828 !important; color: #e08888 !important; -webkit-text-fill-color: #e08888 !important; }
+body.dark .col-heading { border-bottom-color: #4a3030 !important; }
+body.dark .section-header { border-bottom-color: #4a3030 !important; }
+body.dark .log-entry { background: #2e2020 !important; border-bottom-color: #4a3030 !important; }
+body.dark .todo-item { border-bottom-color: #4a3030 !important; }
+body.dark .privacy-note { color: #6a5050 !important; -webkit-text-fill-color: #6a5050 !important; }
+body.dark .privacy-note strong { color: #9a7070 !important; -webkit-text-fill-color: #9a7070 !important; }
+body.dark .pencil-btn { color: #6a5050 !important; -webkit-text-fill-color: #6a5050 !important; }
+body.dark .app-header h1 span { color: #e08888 !important; }
+body.dark .multiples-option { color: #d4b0a0 !important; -webkit-text-fill-color: #d4b0a0 !important; }
+body.dark .todo-carry-btn { color: #e08888 !important; -webkit-text-fill-color: #e08888 !important; }
+body.dark .export-option { color: #d4b0a0 !important; -webkit-text-fill-color: #d4b0a0 !important; }
+body.dark .log-delete { color: #6a5050 !important; -webkit-text-fill-color: #6a5050 !important; }
+body.dark .btn-cancel { background: #3a2828 !important; border-color: #4a3030 !important; color: #d4b0a0 !important; }
+body.dark .feed-type-btn.active-breast { background: #4a2424 !important; border-color: #e08888 !important; color: #e08888 !important; -webkit-text-fill-color: #e08888 !important; }
+body.dark .mood-btn.selected { background: #4a2828 !important; border-color: #e08888 !important; color: #e08888 !important; -webkit-text-fill-color: #e08888 !important; }
+
+/* ── SPLASH ── */
+.splash-overlay {
+position: fixed; inset: 0; z-index: 9999;
+/* hardcoded so it’s solid before JS/CSS vars resolve */
+background: #fce8e4;
+display: flex; align-items: flex-start; justify-content: center;
+padding: 20px 16px 32px;
+overflow-y: auto;
+-webkit-overflow-scrolling: touch;
+}
+.splash-card {
+background: #ffffff;
+border-radius: 20px;
+box-shadow: 0 4px 40px rgba(180,100,100,0.12);
+max-width: 480px; width: 100%;
+padding: 32px 28px 28px;
+text-align: center;
+margin: auto;
+/* make sure card text is always visible */
+color: #2e1f1f;
+}
+.splash-card h1 {
+font-family: ‘DM Serif Display’, serif; font-size: 24px;
+font-weight: 400; letter-spacing: -0.4px; margin-bottom: 4px;
+color: #2e1f1f !important; -webkit-text-fill-color: #2e1f1f !important;
+}
+.splash-card h1 span { color: #c47a7a !important; }
+.splash-tagline { font-size: 13px; color: #b89c9c !important; -webkit-text-fill-color: #b89c9c !important; margin-bottom: 22px; }
+.splash-features { text-align: left; list-style: none; margin-bottom: 20px; max-width: 360px; margin-left: auto; margin-right: auto; }
+.splash-features li {
+display: flex; align-items: flex-start; gap: 10px;
+font-size: 13px; color: #6b4f4f !important; -webkit-text-fill-color: #6b4f4f !important;
+padding: 6px 0; border-bottom: 1px solid #f0ddd8;
+}
+.splash-features li:last-child { border-bottom: none; }
+.splash-features .icon { font-size: 15px; flex-shrink: 0; margin-top: 1px; }
+.splash-privacy {
+background: #fceee8 !important; border-radius: 10px;
+padding: 11px 13px; font-size: 12px; color: #6b4f4f;
+margin-bottom: 20px; text-align: left; line-height: 1.6;
+}
+.splash-privacy strong { color: #2e1f1f !important; -webkit-text-fill-color: #2e1f1f !important; }
+.splash-start {
+width: 100%; padding: 13px; border-radius: 10px; border: none;
+background: #c47a7a; color: #ffffff;
+font-family: ‘DM Sans’, sans-serif; font-size: 15px; font-weight: 600;
+cursor: pointer; transition: background .15s; letter-spacing: 0.2px;
+}
+.splash-start:hover { background: #b06060; }
+.splash-credit { margin-top: 14px; font-size: 10px; color: #b89c9c !important; -webkit-text-fill-color: #b89c9c !important; letter-spacing: 0.4px; }
+
+/* ── HEADER ── */
+.app-header {
+background: #ffffff;
+border-bottom: 1px solid #f0ddd8;
+padding: 12px 20px 10px; display: flex; align-items: center; gap: 12px;
+position: sticky; top: 0; z-index: 100;
+-webkit-backdrop-filter: none;
+}
+/* app-header handled by surface rules above */
+.app-header h1 { font-family: ‘DM Serif Display’, serif; font-size: 20px; font-weight: 400; letter-spacing: -0.3px; }
+.app-header h1 { color: #2e1f1f !important; -webkit-text-fill-color: #2e1f1f !important; }
+html[data-theme=“dark”] .app-header h1 { color: #f5ece8 !important; -webkit-text-fill-color: #f5ece8 !important; }
+.app-header h1 span { color: #c47a7a !important; }
+.header-right { margin-left: auto; display: flex; align-items: center; gap: 6px; position: relative; }
+.header-date { font-size: 11px; color: #b89c9c !important; font-weight: 300; margin-right: 2px; }
+
+/* single icon-style buttons */
+.btn-header-icon {
+width: 30px; height: 30px; border-radius: 7px; border: 1.5px solid #f0ddd8;
+background: #ffffff; color: #6b4f4f !important; -webkit-text-fill-color: #6b4f4f !important; cursor: pointer; font-size: 13px;
+display: flex; align-items: center; justify-content: center;
+transition: all .15s; flex-shrink: 0;
+}
+.btn-header-icon:hover { border-color: #c47a7a; color: #c47a7a !important; -webkit-text-fill-color: #c47a7a !important; background: #fceee8; }
+
+/* export dropdown */
+.export-wrap { position: relative; }
+.btn-export-main {
+display: flex; align-items: center; gap: 4px;
+padding: 5px 10px; border-radius: 7px; border: 1.5px solid #f0ddd8;
+background: #ffffff; color: #2e1f1f; cursor: pointer;
+font-family: ‘DM Sans’, sans-serif; font-size: 11px; font-weight: 500;
+transition: all .15s; white-space: nowrap; height: 30px;
+}
+.btn-export-main:hover, .btn-export-main.open { border-color: #c47a7a; color: #c47a7a; background: #fceee8; }
+.export-dropdown {
+position: absolute; top: calc(100% + 6px); right: 0;
+background: #ffffff; border-radius: 9px;
+box-shadow: 0 4px 20px rgba(0,0,0,0.12); border: 1px solid var(–rule);
+padding: 5px; z-index: 300; min-width: 150px; display: none;
+}
+.export-dropdown.open { display: block; }
+.export-option {
+display: block; width: 100%; padding: 8px 12px; border: none; background: none;
+text-align: left; font-family: ‘DM Sans’, sans-serif; font-size: 12px;
+color: #6b4f4f !important; -webkit-text-fill-color: #6b4f4f !important; cursor: pointer; border-radius: 6px; transition: background .12s;
+}
+.export-option:hover { background: #fceee8; color: #c47a7a !important; -webkit-text-fill-color: #c47a7a !important; }
+
+/* ── COLOR THEME PICKER ── */
+.theme-picker-wrap { position: relative; }
+.btn-theme-picker {
+width: 30px; height: 30px; border-radius: 50%;
+border: 2px solid #ffffff;
+box-shadow: 0 0 0 1.5px var(–accent), 0 2px 6px rgba(0,0,0,.15);
+background: var(–accent);
+cursor: pointer; transition: transform .15s, box-shadow .15s;
+flex-shrink: 0;
+}
+.btn-theme-picker:hover { transform: scale(1.1); }
+.theme-dropdown {
+position: fixed; top: 56px; right: 12px;
+background: #ffffff; border-radius: 14px;
+box-shadow: 0 6px 28px rgba(0,0,0,.18); border: 1px solid #f0ddd8;
+padding: 12px 14px 14px; z-index: 9000;
+display: none;
+min-width: 220px;
+}
+.theme-dropdown.open { display: block; }
+.theme-dropdown-label {
+font-size: 10px; font-weight: 600; text-transform: uppercase;
+letter-spacing: .8px; color: #b89c9c !important; -webkit-text-fill-color: #b89c9c !important; margin-bottom: 10px;
+}
+.swatches { display: flex; gap: 8px; flex-wrap: wrap; }
+.swatch {
+width: 36px; height: 36px; border-radius: 50%; border: 2.5px solid transparent;
+cursor: pointer; transition: transform .15s, border-color .15s;
+position: relative;
+}
+.swatch:hover { transform: scale(1.12); }
+.swatch.active { border-color: #2e1f1f; }
+/* swatch labels removed — using title attr for tooltip */
+.swatch-blush    { background: #c47a7a; }
+.swatch-lavender { background: #8878c8; }
+.swatch-sage     { background: #6a9e7a; }
+.swatch-peach    { background: #e08850; }
+.swatch-mauve    { background: #a8588a; }
+
+/* ── DARK MODE TOGGLE ── */
+/* dark-toggle styles defined above */
+
+/* ── SMOOTH TRANSITIONS ── */
+body, .section, .app-header, .date-nav, .multiples-bar, .column,
+.modal-card, .export-dropdown, .multiples-dropdown, .field-input, .notes-area,
+.feed-type-btn, .side-btn, .mood-btn, .baby-tab, .diaper-btn, .btn-export-main,
+.btn-header-icon, .modal-textarea, .water-cup, .todo-check {
+transition: background .25s, border-color .25s, color .25s, box-shadow .25s;
+}
+
+/* ── LAYOUT ── */
+.app-body { display: grid; grid-template-columns: 1fr 1fr; max-width: 1100px; margin: 0 auto; background: #fce8e4; }
+@media (max-width: 700px) { .app-body { grid-template-columns: 1fr; } }
+.column { padding: 24px 20px; border-right: 1px solid var(–rule); background: #fce8e4; }
+.column:last-child { border-right: none; }
+
+/* ── SECTIONS ── */
+.section { background: #ffffff; border-radius: 12px; box-shadow: var(–shadow); margin-bottom: 16px; overflow: hidden; }
+.section-header { padding: 12px 16px 10px; border-bottom: 1px solid #f0ddd8; display: flex; align-items: center; gap: 8px; background: #ffffff; }
+.section-title { font-family: ‘DM Serif Display’, serif; font-size: 14px; font-weight: 400; letter-spacing: -0.2px; color: var(–ink) !important; -webkit-text-fill-color: var(–ink) !important; }
+.section-body { padding: 14px 16px; background: #ffffff; color: #2e1f1f; }
+
+/* ── DATE NAV + MULTIPLES ── */
+.date-nav-wrap { max-width: 1100px; margin: 0 auto; padding: 16px 20px 0; background: #fce8e4; }
+.date-nav {
+display: flex; align-items: center; background: var(–warm-white);
+border-radius: var(–radius); box-shadow: var(–shadow); overflow: hidden; margin-bottom: 10px; background: #ffffff;
+}
+.date-nav > button { background: transparent; border: none; padding: 10px 14px; cursor: pointer; color: #6b4f4f !important; -webkit-text-fill-color: #6b4f4f !important; font-size: 16px; transition: background .15s; }
+.date-nav > button:hover { background: #fceee8; }
+.date-nav-label { flex: 1; text-align: center; font-family: ‘DM Serif Display’, serif; font-size: 15px; color: var(–ink) !important; -webkit-text-fill-color: var(–ink) !important; }
+.date-nav-today { font-size: 11px; color: #c47a7a !important; -webkit-text-fill-color: #c47a7a !important; cursor: pointer; padding: 10px 12px; border: none; background: transparent; font-family: ‘DM Sans’, sans-serif; font-weight: 500; }
+.date-nav-today:hover { text-decoration: underline; }
+
+/* ── MULTIPLES BAR ── */
+.multiples-bar {
+display: flex; align-items: center; gap: 10px;
+padding: 9px 14px; margin-bottom: 16px;
+background: #ffffff; border-radius: var(–radius); box-shadow: var(–shadow);
+position: relative;
+}
+.multiples-question { font-size: 12px; color: #b89c9c !important; -webkit-text-fill-color: #b89c9c !important; flex: 1; }
+.multiples-question strong { color: #6b4f4f; font-weight: 500; }
+.multiples-btn {
+font-size: 12px; padding: 5px 12px; border-radius: 20px;
+border: 1.5px solid #f0ddd8; background: #ffffff; color: #6b4f4f !important; -webkit-text-fill-color: #6b4f4f !important;
+cursor: pointer; font-family: ‘DM Sans’, sans-serif; font-weight: 500;
+transition: all .15s; display: flex; align-items: center; gap: 4px;
+}
+.multiples-btn:hover, .multiples-btn.open { border-color: #c47a7a; color: #c47a7a !important; -webkit-text-fill-color: #c47a7a !important; background: #fceee8; }
+.multiples-dropdown {
+position: absolute; top: calc(100% + 6px); right: 12px;
+background: #ffffff; border-radius: 10px;
+box-shadow: 0 4px 20px rgba(0,0,0,0.12); border: 1px solid var(–rule);
+padding: 6px; z-index: 200; min-width: 180px; display: none;
+}
+.multiples-dropdown.open { display: block; }
+.multiples-option {
+display: block; width: 100%; padding: 8px 12px; border: none; background: none;
+text-align: left; font-family: ‘DM Sans’, sans-serif; font-size: 13px;
+color: #6b4f4f !important; -webkit-text-fill-color: #6b4f4f !important; cursor: pointer; border-radius: 7px; transition: background .12s;
+}
+.multiples-option:hover { background: #fceee8; color: #c47a7a; }
+.multiples-option.selected { background: #fceee8; color: #c47a7a; font-weight: 500; }
+
+/* ── BABY TABS ── */
+.baby-tabs { display: flex; gap: 6px; margin-bottom: 10px; flex-wrap: wrap; }
+.baby-tab {
+flex: 1; min-width: 72px; padding: 7px 8px; border-radius: 7px; border: 1.5px solid #f0ddd8;
+background: none; font-family: ‘DM Sans’, sans-serif; font-size: 13px; font-weight: 500;
+cursor: pointer; transition: all .15s; color: #6b4f4f; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+}
+.baby-tab { background: #ffffff; border-color: #f0ddd8; color: #6b4f4f !important; -webkit-text-fill-color: #6b4f4f !important; }
+.baby-tab.tab-a { background: #fceee8 !important; border-color: #c47a7a !important; color: #c47a7a !important; -webkit-text-fill-color: #c47a7a !important; }
+.baby-tab.tab-b { background: #f3ecfa !important; border-color: #a07ab8 !important; color: #804a98 !important; -webkit-text-fill-color: #804a98 !important; }
+.baby-tab.tab-c { background: #e8f2fa !important; border-color: #7a9ec4 !important; color: #4a7da4 !important; -webkit-text-fill-color: #4a7da4 !important; }
+.baby-tab.tab-d { background: #faf0e8 !important; border-color: #c49a7a !important; color: #a47850 !important; -webkit-text-fill-color: #a47850 !important; }
+
+/* ── BABY NAME ROW ── */
+.baby-name-row { display: flex; align-items: center; gap: 6px; margin-bottom: 14px; }
+.baby-name-display { font-family: ‘DM Serif Display’, serif; font-size: 15px; color: #2e1f1f !important; -webkit-text-fill-color: #2e1f1f !important; }
+.baby-name-input {
+font-family: ‘DM Serif Display’, serif; font-size: 15px; color: #2e1f1f !important;
+-webkit-text-fill-color: #2e1f1f !important;
+border: none; border-bottom: 1.5px solid #c47a7a; background: #ffffff !important;
+outline: none; width: 180px; padding: 2px 6px; border-radius: 4px 4px 0 0;
+}
+.pencil-btn {
+background: none; border: none; cursor: pointer; color: #b89c9c !important; -webkit-text-fill-color: #b89c9c !important;
+font-size: 13px; padding: 2px 4px; border-radius: 4px; transition: all .15s; line-height: 1;
+}
+.pencil-btn:hover { color: #c47a7a !important; -webkit-text-fill-color: #c47a7a !important; background: #fceee8; }
+
+/* ── FORM FIELDS ── */
+.feed-form { display: flex; flex-direction: column; gap: 10px; margin-bottom: 12px; }
+.feed-form .full { width: 100%; }
+.feed-form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+.feed-form-row > * { min-width: 0; } /* prevent grid blowout */
+.feed-form .full { grid-column: 1/-1; }
+.field-label { font-size: 11px; font-weight: 500; color: #b89c9c !important; -webkit-text-fill-color: #b89c9c !important; text-transform: uppercase; letter-spacing: 0.6px; display: block; margin-bottom: 4px; }
+.field-input {
+width: 100%; min-width: 0; box-sizing: border-box;
+padding: 7px 10px; border: 1.5px solid #f0ddd8; border-radius: 7px;
+font-family: ‘DM Sans’, sans-serif; font-size: 13px;
+background: #fce8e4 !important; color: #2e1f1f !important;
+-webkit-text-fill-color: #2e1f1f !important;
+outline: none; transition: border-color .15s;
+}
+.field-input:focus { border-color: #c47a7a !important; background: #ffffff !important; }
+select.field-input { cursor: pointer; }
+
+.feed-type-btns, .side-btns { display: flex; gap: 6px; }
+.feed-type-btn, .side-btn {
+flex: 1; padding: 7px 6px; border-radius: 7px; border: 1.5px solid #f0ddd8;
+background: #ffffff; font-family: ‘DM Sans’, sans-serif; font-size: 12px; font-weight: 500;
+cursor: pointer; transition: all .15s; color: #6b4f4f !important; -webkit-text-fill-color: #6b4f4f !important;
+}
+.feed-type-btn.active-breast { background: #fceee8 !important; border-color: #c47a7a !important; color: #9a5555 !important; -webkit-text-fill-color: #9a5555 !important; }
+.feed-type-btn.active-bottle { background: #e8f2fa !important; border-color: #7a9ec4 !important; color: #4a7d94 !important; -webkit-text-fill-color: #4a7d94 !important; }
+.side-btn.active { background: #fceee8 !important; border-color: #c47a7a !important; color: #9a5555 !important; -webkit-text-fill-color: #9a5555 !important; }
+
+.btn-primary {
+width: 100%; padding: 9px; border-radius: 7px; border: none; background: #c47a7a;
+color: #ffffff !important; -webkit-text-fill-color: #ffffff !important;
+font-family: ‘DM Sans’, sans-serif; font-size: 13px; font-weight: 500;
+cursor: pointer; transition: background .15s; margin-top: 4px;
+}
+.btn-primary:hover { background: #b06060; }
+.btn-primary.c-a { background: #c47a7a; } .btn-primary.c-a:hover { background: #b06060; }
+.btn-primary.c-b { background: #a07ab8; } .btn-primary.c-b:hover { background: #8a60a0; }
+.btn-primary.c-c { background: #7a9ec4; } .btn-primary.c-c:hover { background: #6080a8; }
+.btn-primary.c-d { background: #c49a7a; } .btn-primary.c-d:hover { background: #a07858; }
+
+/* ── LOG ENTRIES ── */
+.feed-log { max-height: 280px; overflow-y: auto; }
+.feed-log::-webkit-scrollbar { width: 4px; }
+.feed-log::-webkit-scrollbar-thumb { background: #f0ddd8; border-radius: 4px; }
+.log-entry { display: flex; align-items: flex-start; gap: 10px; padding: 9px 0; border-bottom: 1px solid #f0ddd8; background: #ffffff; width: 100%; box-sizing: border-box; }
+.log-entry:last-child { border-bottom: none; }
+.log-time { font-size: 11px; color: #b89c9c !important; -webkit-text-fill-color: #b89c9c !important; min-width: 36px; padding-top: 1px; }
+.log-badge { font-size: 10px; font-weight: 600; padding: 2px 7px; border-radius: 20px; text-transform: uppercase; letter-spacing: 0.4px; white-space: nowrap; }
+.badge-breast { background: #fceee8; color: #9a5555; }
+.badge-bottle { background: #e8f2fa; color: #4a7d94; }
+.badge-a { background: #fceee8; color: #c47a7a; }
+.badge-b { background: #f3ecfa; color: #804a98; }
+.badge-c { background: #e8f2fa; color: #4a7da4; }
+.badge-d { background: #faf0e8; color: #a47850; }
+.log-details { flex: 1; font-size: 12px; color: #6b4f4f; }
+.log-delete { background: none; border: none; color: #b89c9c !important; -webkit-text-fill-color: #b89c9c !important; cursor: pointer; padding: 2px 4px; font-size: 14px; line-height: 1; border-radius: 4px; transition: all .15s; }
+.log-delete:hover { background: #fee; color: #c44 !important; -webkit-text-fill-color: #c44 !important; }
+
+.summary-strip { display: flex; gap: 8px; flex-wrap: wrap; padding: 10px 0 4px; }
+.summary-chip { font-size: 11px; padding: 3px 9px; border-radius: 20px; background: #fceee8; color: #c47a7a; font-weight: 500; }
+
+/* ── DIAPER ── */
+.diaper-row { display: flex; align-items: center; gap: 10px; margin-bottom: 10px; flex-wrap: wrap; }
+.diaper-btn { padding: 6px 14px; border-radius: 20px; border: 1.5px solid #f0ddd8; background: #ffffff; font-family: ‘DM Sans’, sans-serif; font-size: 12px; font-weight: 500; cursor: pointer; transition: all .15s; color: #6b4f4f !important; -webkit-text-fill-color: #6b4f4f !important; }
+.diaper-btn:hover { border-color: #c47a7a; }
+.diaper-count { font-size: 11px; color: #b89c9c !important; -webkit-text-fill-color: #b89c9c !important; }
+.diaper-count strong { color: #2e1f1f !important; -webkit-text-fill-color: #2e1f1f !important; }
+
+/* ── WATER ── */
+.water-tracker { display: flex; align-items: center; gap: 10px; margin-bottom: 10px; }
+.water-cups { display: flex; gap: 4px; flex-wrap: wrap; }
+.water-cup { width: 22px; height: 22px; border-radius: 4px; border: 1.5px solid #c47a7a; background: #ffffff; cursor: pointer; transition: all .15s; }
+.water-cup.filled,
+button.water-cup.filled { background: #c47a7a !important; border-color: #c47a7a !important; }
+.water-label { font-size: 11px; color: #b89c9c !important; margin-left: 4px; }
+
+/* ── MEALS ── */
+.meal-row { display: flex; gap: 8px; margin-bottom: 8px; align-items: center; }
+.meal-label-tag { font-size: 11px; font-weight: 500; padding: 5px 8px; border-radius: 6px; background: #fceee8 !important; color: #c47a7a !important; -webkit-text-fill-color: #c47a7a !important; white-space: nowrap; min-width: 60px; text-align: center; align-self: center; }
+
+/* ── MOOD ── */
+.mood-row { display: flex; gap: 6px; flex-wrap: wrap; }
+.mood-btn { padding: 6px 12px; border-radius: 20px; border: 1.5px solid #f0ddd8; background: #ffffff; font-family: ‘DM Sans’, sans-serif; font-size: 12px; cursor: pointer; transition: all .15s; color: #6b4f4f !important; -webkit-text-fill-color: #6b4f4f !important; }
+.mood-btn.selected { border-color: #c47a7a !important; background: #fceee8 !important; color: #c47a7a !important; -webkit-text-fill-color: #c47a7a !important; font-weight: 500; }
+.energy-row { display: flex; gap: 4px; align-items: center; margin-top: 10px; }
+.energy-dot { width: 28px; height: 28px; border-radius: 50%; border: 1.5px solid #f0ddd8; background: #ffffff; cursor: pointer; transition: all .15s; font-size: 11px; font-weight: 600; color: #b89c9c !important; -webkit-text-fill-color: #b89c9c !important; display: flex; align-items: center; justify-content: center; }
+.energy-dot.s1 { background: #f0e8e8 !important; border-color: #d4a0a0 !important; color: #9a6060 !important; -webkit-text-fill-color: #9a6060 !important; }
+.energy-dot.s2 { background: #f5efe0 !important; border-color: #c9a870 !important; color: #8a7040 !important; -webkit-text-fill-color: #8a7040 !important; }
+.energy-dot.s3 { background: #e8f0e7 !important; border-color: #9db89a !important; color: #507050 !important; -webkit-text-fill-color: #507050 !important; }
+.energy-dot.s4 { background: #e8f2f7 !important; border-color: #8fb5c8 !important; color: #407090 !important; -webkit-text-fill-color: #407090 !important; }
+.energy-dot.s5 { background: #fceee8 !important; border-color: #c47a7a !important; color: #c47a7a !important; -webkit-text-fill-color: #c47a7a !important; }
+.energy-label { font-size: 11px; color: #b89c9c !important; -webkit-text-fill-color: #b89c9c !important; margin-left: 6px; }
+
+/* ── NAP ── */
+.nap-row { display: flex; gap: 6px; margin-bottom: 8px; align-items: flex-end; flex-wrap: wrap; }
+.nap-row .field-group { flex: 1; min-width: 80px; }
+.nap-grid > * { min-width: 0; } /* prevent grid blowout on iOS */
+
+/* ── TODO ── */
+.todo-input-row { display: flex; gap: 8px; margin-bottom: 10px; }
+.todo-input-row .field-input { flex: 1; }
+.btn-add { padding: 7px 14px; border-radius: 7px; border: none; background: #c47a7a; color: #ffffff !important; -webkit-text-fill-color: #ffffff !important; font-family: ‘DM Sans’, sans-serif; font-size: 13px; font-weight: 500; cursor: pointer; transition: background .15s; white-space: nowrap; }
+.btn-add:hover { background: #b06060; }
+.todo-list { list-style: none; }
+.todo-item { display: flex; align-items: center; gap: 9px; padding: 7px 0; border-bottom: 1px solid #f0ddd8; }
+.todo-item:last-child { border-bottom: none; }
+.todo-check { width: 16px; height: 16px; border-radius: 4px; border: 1.5px solid #f0ddd8; cursor: pointer; flex-shrink: 0; display: flex; align-items: center; justify-content: center; transition: all .15s; background: none; }
+.todo-check.done { background: #c47a7a !important; border-color: #c47a7a !important; }
+.todo-check.done::after { content: ‘✓’; font-size: 10px; color: white; font-weight: 700; }
+.todo-text { flex: 1; font-size: 13px; color: #2e1f1f !important; -webkit-text-fill-color: #2e1f1f !important; }
+.todo-text.done { text-decoration: line-through; color: #b89c9c !important; -webkit-text-fill-color: #b89c9c !important; }
+
+/* ── NOTES ── */
+.notes-area { display: block; box-sizing: border-box; width: 100%; max-width: 100%; min-height: 90px; border: 1.5px solid #f0ddd8; border-radius: 7px; padding: 10px; font-family: ‘DM Sans’, sans-serif; font-size: 13px; color: #2e1f1f !important; -webkit-text-fill-color: #2e1f1f !important; background: #ffffff !important; resize: vertical; outline: none; line-height: 1.6; overflow-x: hidden; }
+.notes-area:focus { border-color: #c47a7a; }
+
+/* ── COL HEADING ── */
+.col-heading { font-family: ‘DM Serif Display’, serif; font-size: 17px; font-weight: 400; color: #2e1f1f !important; -webkit-text-fill-color: #2e1f1f !important; margin-bottom: 14px; padding-bottom: 10px; border-bottom: 1px solid #f0ddd8; display: flex; align-items: center; gap: 10px; }
+.col-heading .dot {
+display: inline-block; width: 8px; height: 8px; border-radius: 50%;
+flex-shrink: 0; background: #c47a7a; overflow: hidden;
+font-size: 0; line-height: 0; /* prevent any text rendering */
+}
+
+/* ── MISC ── */
+.empty-state { text-align: center; padding: 20px; color: #b89c9c !important; -webkit-text-fill-color: #b89c9c !important; font-size: 12px; font-style: italic; }
+.hidden { display: none !important; }
+.privacy-note { text-align: center; font-size: 11px; color: #b89c9c; padding: 12px 20px 20px; }
+.privacy-note strong { color: #6b4f4f; }
+
+/* ── COLOR THEME PICKER ── */
+.theme-picker-wrap { position: relative; }
+.btn-theme-picker {
+width: 30px; height: 30px; border-radius: 50%;
+border: 2px solid #ffffff;
+box-shadow: 0 0 0 1.5px var(–accent), 0 2px 6px rgba(0,0,0,.15);
+background: var(–accent);
+cursor: pointer; transition: transform .15s, box-shadow .15s;
+flex-shrink: 0;
+}
+.btn-theme-picker:hover { transform: scale(1.1); }
+.theme-dropdown {
+position: fixed; top: 56px; right: 12px;
+background: #ffffff; border-radius: 14px;
+box-shadow: 0 6px 28px rgba(0,0,0,.18); border: 1px solid #f0ddd8;
+padding: 12px 14px 14px; z-index: 9000;
+display: none;
+min-width: 220px;
+}
+.theme-dropdown.open { display: block; }
+.theme-dropdown-label {
+font-size: 10px; font-weight: 600; text-transform: uppercase;
+letter-spacing: .8px; color: #b89c9c !important; -webkit-text-fill-color: #b89c9c !important; margin-bottom: 10px;
+}
+.swatches { display: flex; gap: 8px; flex-wrap: wrap; }
+.swatch {
+width: 36px; height: 36px; border-radius: 50%; border: 2.5px solid transparent;
+cursor: pointer; transition: transform .15s, border-color .15s;
+position: relative;
+}
+.swatch:hover { transform: scale(1.12); }
+.swatch.active { border-color: #2e1f1f; }
+/* swatch labels removed — using title attr for tooltip */
+.swatch-blush    { background: #c47a7a; }
+.swatch-lavender { background: #8878c8; }
+.swatch-sage     { background: #6a9e7a; }
+.swatch-peach    { background: #e08850; }
+.swatch-mauve    { background: #a8588a; }
+
+/* ── DARK MODE TOGGLE ── */
+.dark-toggle { font-size: 16px; border: none !important; background: transparent !important; box-shadow: none !important; width: 32px; height: 32px; }
+[data-theme=“dark”] .dark-toggle { content: ‘☀️’; }
+
+/* ── SMOOTH TRANSITIONS ── */
+.section, .app-header, .date-nav, .multiples-bar, .column, .splash-card, .modal-card,
+.export-dropdown, .multiples-dropdown, .feed-type-btn, .side-btn, .mood-btn,
+.baby-tab, .diaper-btn, .btn-export-main, .btn-header-icon, .field-input, .notes-area {
+transition: background .25s, border-color .25s, color .25s;
+}
+
+/* ── TOAST NOTIFICATION ── */
+.toast {
+position: fixed; bottom: 24px; left: 50%; transform: translateX(-50%) translateY(20px);
+background: #2e1f1f; color: #fff; padding: 10px 20px; border-radius: 24px;
+font-size: 13px; font-weight: 500; z-index: 9000;
+opacity: 0; transition: opacity .25s, transform .25s; pointer-events: none;
+white-space: nowrap; box-shadow: 0 4px 16px rgba(0,0,0,.2);
+}
+.toast.show { opacity: 1; transform: translateX(-50%) translateY(0); }
+.toast.error { background: #c44; }
+
+/* ── STORAGE WARNING ── */
+.storage-warning {
+background: #fff3cd; border: 1px solid #f0c040; border-radius: 8px;
+padding: 8px 12px; font-size: 12px; color: #7a5800; margin-bottom: 10px;
+}
+
+/* ── LAST FED BADGE on tabs ── */
+.baby-tab-sub { font-size: 9px; font-weight: 400; opacity: .75; display: block; margin-top: 1px; }
+
+/* ── WATER GOAL CONTROLS ── */
+.water-goal-row { display: flex; align-items: center; gap: 6px; margin-top: 6px; }
+.water-goal-btn {
+width: 22px; height: 22px; border-radius: 50%; border: 1.5px solid #f0ddd8;
+background: #ffffff; color: #6b4f4f !important; -webkit-text-fill-color: #6b4f4f !important; cursor: pointer;
+font-size: 14px; line-height: 1; display: flex; align-items: center; justify-content: center;
+transition: all .15s; flex-shrink: 0;
+}
+.water-goal-btn:hover { border-color: #c47a7a; color: #c47a7a !important; -webkit-text-fill-color: #c47a7a !important; }
+.water-goal-label { font-size: 11px; color: #b89c9c !important; -webkit-text-fill-color: #b89c9c !important; }
+
+/* ── COMBINED FEED SUMMARY (multiples) ── */
+.combined-summary { margin-bottom: 8px; padding: 8px 10px; background: #fce8e4; border-radius: 8px; }
+.combined-summary-title { font-size: 10px; font-weight: 600; text-transform: uppercase; letter-spacing: .6px; color: #b89c9c; margin-bottom: 6px; }
+.combined-row { display: flex; gap: 6px; flex-wrap: wrap; }
+
+/* ── CLEAR DATA SECTION ── */
+.danger-zone { margin-top: 8px; padding-top: 10px; border-top: 1px solid #f0ddd8; }
+.btn-danger {
+font-size: 11px; padding: 5px 12px; border-radius: 20px;
+border: 1.5px solid #e0a0a0; background: none; color: #c06060;
+cursor: pointer; font-family: ‘DM Sans’, sans-serif; font-weight: 500; transition: all .15s;
+}
+.btn-danger:hover { background: #fceee8; border-color: #c06060; }
+
+/* ── EDIT ENTRY MODAL ── */
+.edit-field-row { display: flex; gap: 8px; margin-bottom: 10px; flex-wrap: wrap; }
+.edit-field-row .field-group { flex: 1; min-width: 80px; }
+
+/* ── CARRY TODOS FORWARD ── */
+.todo-carry-btn {
+font-size: 11px; color: #c47a7a !important; -webkit-text-fill-color: #c47a7a !important; background: none; border: none;
+cursor: pointer; font-family: ‘DM Sans’, sans-serif; padding: 2px 0;
+text-decoration: underline; text-underline-offset: 2px;
+}
+
+/* ── MODAL ── */
+.modal-overlay { position: fixed; inset: 0; background: rgba(0,0,0,0.3); z-index: 500; display: flex; align-items: center; justify-content: center; padding: 24px; }
+.modal-card { background: #ffffff; border-radius: 12px; padding: 24px; max-width: 420px; width: 100%; box-shadow: 0 8px 40px rgba(0,0,0,0.15); }
+.modal-card h3 { font-family: ‘DM Serif Display’, serif; font-size: 18px; font-weight: 400; margin-bottom: 10px; color: #2e1f1f !important; -webkit-text-fill-color: #2e1f1f !important; }
+.modal-card p { font-size: 13px; color: #6b4f4f !important; -webkit-text-fill-color: #6b4f4f !important; margin-bottom: 14px; }
+.modal-textarea { width: 100%; height: 120px; border: 1.5px solid #f0ddd8; border-radius: 7px; padding: 10px; font-family: ‘DM Sans’, sans-serif; font-size: 12px; resize: none; outline: none; margin-bottom: 12px; background: #fce8e4; color: #2e1f1f; }
+.modal-textarea:focus { border-color: #c47a7a; }
+.modal-btns { display: flex; gap: 8px; justify-content: flex-end; }
+.btn-cancel { padding: 8px 16px; border-radius: 7px; border: 1.5px solid #f0ddd8; background: #ffffff; font-family: ‘DM Sans’, sans-serif; font-size: 13px; cursor: pointer; color: #6b4f4f; }
+.btn-confirm { padding: 8px 16px; border-radius: 7px; border: none; background: #c47a7a; color: #ffffff !important; -webkit-text-fill-color: #ffffff !important; font-family: ‘DM Sans’, sans-serif; font-size: 13px; font-weight: 500; cursor: pointer; }
+.btn-confirm:hover { background: #b06060; }
+</style>
+
+<script>
+  // Hide splash immediately if already seen — prevents flash of content
+  (function(){
+    try {
+      if(localStorage.getItem('ppd_splash_seen')) {
+        document.addEventListener('DOMContentLoaded', function(){
+          var s = document.getElementById('splashOverlay');
+          if(s) s.style.display = 'none';
+        });
+      }
+    } catch(e){}
+  })();
+</script>
+
+</head>
+<body>
+
+<!-- ══ SPLASH ══ -->
+
+<div class="splash-overlay" id="splashOverlay">
+  <div class="splash-card">
+    <h1>Postpartum <span>Daily Planner</span></h1>
+    <p class="splash-tagline">Your whole day, all in one place — no app required.</p>
+    <ul class="splash-features">
+      <li><span class="icon">🍼</span><span>Baby feeding tracker — breast or bottle, amount, duration, which side</span></li>
+      <li><span class="icon">👶</span><span>Diaper log with daily wet &amp; dirty totals</span></li>
+      <li><span class="icon">👯</span><span>Twins &amp; multiples support — track up to 4 babies separately</span></li>
+      <li><span class="icon">✏️</span><span>Name your babies — personalize the tabs with their actual names</span></li>
+      <li><span class="icon">💛</span><span>Mom's planner — mood, energy, water, meals, naps, to-dos &amp; notes</span></li>
+      <li><span class="icon">📅</span><span>Navigate back to any past day to review or add entries</span></li>
+      <li><span class="icon">💾</span><span>Export to JSON or CSV anytime for a full backup of your data</span></li>
+    </ul>
+    <div class="splash-privacy">
+      🔒 <strong>100% private.</strong> All your data saves only on this device in your browser's local storage. Nothing is uploaded, shared, or tracked by anyone — ever. No account. No subscription. No app.
+    </div>
+    <button class="splash-start" onclick="closeSplash()">Get Started</button>
+    <div class="splash-credit">Created by CurlysGlitching &nbsp;·&nbsp; v1.0</div>
+  </div>
+</div>
+
+<!-- ══ IMPORT MODAL ══ -->
+
+<div class="modal-overlay hidden" id="importModal">
+  <div class="modal-card">
+    <h3>Import Data</h3>
+    <p>Paste your previously exported JSON below. Existing entries won't be overwritten.</p>
+    <textarea class="modal-textarea" id="importText" placeholder="Paste JSON here…"></textarea>
+    <div class="modal-btns">
+      <button class="btn-cancel" onclick="closeImport()">Cancel</button>
+      <button class="btn-confirm" onclick="doImport()">Import</button>
+    </div>
+  </div>
+</div>
+
+<!-- ══ TOAST ══ -->
+
+<div class="toast" id="toast"></div>
+
+<!-- ══ EDIT ENTRY MODAL ══ -->
+
+<div class="modal-overlay hidden" id="editModal">
+  <div class="modal-card">
+    <h3 id="editModalTitle">Edit Entry</h3>
+    <div id="editModalBody"></div>
+    <div class="modal-btns">
+      <button class="btn-cancel" onclick="closeEditModal()">Cancel</button>
+      <button class="btn-confirm" onclick="saveEditModal()">Save</button>
+    </div>
+  </div>
+</div>
+
+<!-- ══ CONFIRM MODAL ══ -->
+
+<div class="modal-overlay hidden" id="confirmModal">
+  <div class="modal-card">
+    <h3 id="confirmTitle">Are you sure?</h3>
+    <p id="confirmMsg"></p>
+    <div class="modal-btns">
+      <button class="btn-cancel" onclick="closeConfirm()">Cancel</button>
+      <button class="btn-confirm" id="confirmOkBtn" style="background:#c06060">Yes, delete</button>
+    </div>
+  </div>
+</div>
+
+<!-- ══ HEADER ══ -->
+
+<div class="app-header">
+  <h1>Postpartum <span>Daily Planner</span></h1>
+  <div class="header-right">
+    <div class="header-date" id="headerDate"></div>
+    <!-- Color theme picker -->
+    <div class="theme-picker-wrap">
+      <button class="btn-theme-picker" id="themePickerBtn" onclick="toggleThemePicker()" title="Change color theme"></button>
+      <div class="theme-dropdown" id="themeDropdown">
+        <div class="theme-dropdown-label">Color Theme</div>
+        <div class="swatches" style="margin-bottom:10px;">
+          <button class="swatch swatch-blush active"    data-label="Blush"    onclick="setColorTheme('blush')"></button>
+          <button class="swatch swatch-lavender"        data-label="Lavender" onclick="setColorTheme('lavender')"></button>
+          <button class="swatch swatch-sage"            data-label="Sage"     onclick="setColorTheme('sage')"></button>
+          <button class="swatch swatch-peach"           data-label="Peach"    onclick="setColorTheme('peach')"></button>
+          <button class="swatch swatch-mauve"           data-label="Mauve"    onclick="setColorTheme('mauve')"></button>
+        </div>
+      </div>
+    </div>
+    <!-- Dark mode toggle -->
+    <button class="btn-header-icon dark-toggle" id="darkToggle" onclick="toggleDark()" title="Toggle dark mode">🌙</button>
+    <!-- Import icon -->
+    <button class="btn-header-icon" onclick="openImport()" title="Import backup">↑</button>
+    <!-- Export dropdown -->
+    <div class="export-wrap">
+      <button class="btn-export-main" id="exportBtn" onclick="toggleExportDropdown()">Export &#9662;</button>
+      <div class="export-dropdown" id="exportDropdown">
+        <button class="export-option" onclick="exportJSON();closeExportDropdown()">↓ JSON backup</button>
+        <button class="export-option" onclick="exportCSV();closeExportDropdown()">↓ CSV spreadsheet</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ══ DATE NAV + MULTIPLES ══ -->
+
+<div class="date-nav-wrap">
+  <div class="date-nav">
+    <button onclick="changeDate(-1)">&#8592;</button>
+    <div class="date-nav-label" id="dateLabel"></div>
+    <button class="date-nav-today" onclick="goToday()">Today</button>
+    <button onclick="changeDate(1)">&#8594;</button>
+  </div>
+
+  <div class="multiples-bar" id="multiplesBar">
+    <div class="multiples-question">Have multiples? &nbsp;<strong id="babyCountLabel"></strong></div>
+    <button class="multiples-btn" id="multiplesBtn" onclick="toggleMultiplesDropdown()">Change &#9662;</button>
+    <div class="multiples-dropdown" id="multiplesDropdown">
+      <button class="multiples-option" onclick="setBabyCount(1)">1 baby</button>
+      <button class="multiples-option" onclick="setBabyCount(2)">2 babies (twins)</button>
+      <button class="multiples-option" onclick="setBabyCount(3)">3 babies (triplets)</button>
+      <button class="multiples-option" onclick="setBabyCount(4)">4 babies (quads)</button>
+    </div>
+  </div>
+</div>
+
+<!-- ══ APP BODY ══ -->
+
+<div class="app-body">
+
+  <!-- ═ LEFT: BABY ═ -->
+
+  <div class="column">
+    <div class="col-heading">
+      <span class="dot" style="background:#c47a7a;font-size:0;line-height:0" id="babyDot"></span>
+      Baby Tracker
+    </div>
+
+```
+<!-- storageWarning injected by JS when needed -->
+<!-- babyTabs injected by JS when babyCount > 1 -->
+
+<div class="baby-name-row" id="babyNameRow">
+  <span class="baby-name-display" id="babyNameDisplay"></span>
+  <button class="pencil-btn" onclick="startEditName()" title="Edit name">✏️</button>
+  <input class="baby-name-input hidden" id="babyNameInput" type="text"
+    onblur="saveNameEdit()" onkeydown="if(event.key==='Enter')saveNameEdit()">
+</div>
+
+<!-- COMBINED SUMMARY (multiples only) -->
+<div class="combined-summary hidden" id="combinedSummary">
+  <div class="combined-summary-title" id="combinedTitle"></div>
+  <div class="combined-row" id="combinedRow"></div>
+</div>
+
+<!-- FEEDING LOG -->
+<div class="section">
+  <div class="section-header"><span class="section-title">Feeding Log</span></div>
+  <div class="section-body">
+    <div class="feed-form">
+      <div class="full">
+        <label class="field-label">Type</label>
+        <div class="feed-type-btns">
+          <button class="feed-type-btn active-breast" id="btnBreast" onclick="setFeedType('breast')">🤱 Breast</button>
+          <button class="feed-type-btn" id="btnBottle" onclick="setFeedType('bottle')">🍼 Bottle</button>
+        </div>
+      </div>
+      <div class="full" id="sideField">
+        <label class="field-label">Side</label>
+        <div class="side-btns">
+          <button class="side-btn" id="btnLeft" onclick="setSide('left')">Left</button>
+          <button class="side-btn" id="btnRight" onclick="setSide('right')">Right</button>
+          <button class="side-btn" id="btnBoth" onclick="setSide('both')">Both</button>
+        </div>
+      </div>
+      <div class="feed-form-row">
+        <div id="durationField">
+          <label class="field-label">Duration (min)</label>
+          <input class="field-input" type="number" id="feedDuration" placeholder="e.g. 15" min="1" max="120">
+        </div>
+        <div id="amountField" class="hidden">
+          <label class="field-label">Amount</label>
+          <input class="field-input" type="number" id="feedAmount" placeholder="oz" min="0" max="12" step="0.5">
+        </div>
+        <div id="unitField" class="hidden">
+          <label class="field-label">Unit</label>
+          <select class="field-input" id="feedUnit">
+            <option value="oz">oz</option>
+            <option value="ml">ml</option>
+          </select>
+        </div>
+        <div>
+          <label class="field-label">Time</label>
+          <input class="field-input" type="time" id="feedTime">
+        </div>
+      </div>
+      <div class="full">
+        <label class="field-label">Notes (optional)</label>
+        <input class="field-input" type="text" id="feedNotes" placeholder="e.g. fussy, slow latch…">
+      </div>
+    </div>
+    <button class="btn-primary c-a" id="logFeedBtn" onclick="logFeed()">Log Feed</button>
+    <div class="summary-strip" id="feedSummary"></div>
+    <div class="feed-log" id="feedLog"><div class="empty-state">No feeds logged today.</div></div>
+  </div>
+</div>
+
+<!-- DIAPER LOG -->
+<div class="section">
+  <div class="section-header"><span class="section-title">Diaper Log</span></div>
+  <div class="section-body">
+    <div class="diaper-row">
+      <button class="diaper-btn" onclick="logDiaper('wet')">💧 Wet</button>
+      <button class="diaper-btn" onclick="logDiaper('dirty')">💩 Dirty</button>
+      <button class="diaper-btn" onclick="logDiaper('both')">Both</button>
+      <input class="field-input" type="time" id="diaperTime" style="width:100px;font-size:12px;padding:5px 8px;">
+    </div>
+    <div class="diaper-count" id="diaperCount">Today: <strong>0</strong> wet &nbsp;·&nbsp; <strong>0</strong> dirty</div>
+    <div class="feed-log" id="diaperLog" style="margin-top:10px;"><div class="empty-state">No diapers logged today.</div></div>
+  </div>
+</div>
+```
+
+  </div>
+
+  <!-- ═ RIGHT: MOM ═ -->
+
+  <div class="column">
+    <div class="col-heading">
+      <span class="dot" style="background:#c47a7a;font-size:0;line-height:0"></span>
+      Mom's Day
+    </div>
+
+```
+<div class="section">
+  <div class="section-header"><span class="section-title">Mood &amp; Energy</span></div>
+  <div class="section-body">
+    <label class="field-label">How are you feeling?</label>
+    <div class="mood-row" id="moodRow">
+      <button class="mood-btn" onclick="setMood('great')">Great</button>
+      <button class="mood-btn" onclick="setMood('good')">Good</button>
+      <button class="mood-btn" onclick="setMood('okay')">Okay</button>
+      <button class="mood-btn" onclick="setMood('low')">Low</button>
+      <button class="mood-btn" onclick="setMood('overwhelmed')">Overwhelmed</button>
+    </div>
+    <div class="energy-row">
+      <label class="field-label" style="margin:0;white-space:nowrap">Energy:</label>
+      <div style="display:flex;gap:4px" id="energyRow">
+        <button class="energy-dot" onclick="setEnergy(1)" title="Depleted">1</button>
+        <button class="energy-dot" onclick="setEnergy(2)" title="Low">2</button>
+        <button class="energy-dot" onclick="setEnergy(3)" title="Okay">3</button>
+        <button class="energy-dot" onclick="setEnergy(4)" title="Good">4</button>
+        <button class="energy-dot" onclick="setEnergy(5)" title="Great">5</button>
+      </div>
+      <span class="energy-label" id="energyLabel">—</span>
+    </div>
+  </div>
+</div>
+
+<div class="section">
+  <div class="section-header"><span class="section-title">Water &amp; Meals</span></div>
+  <div class="section-body">
+    <label class="field-label">Water (8oz glasses — aim for 8+)</label>
+    <div class="water-tracker">
+      <div class="water-cups" id="waterCups"></div>
+      <span class="water-label" id="waterLabel">0 / 8</span>
+    </div>
+    <div class="water-goal-row">
+      <span class="water-goal-label">Daily goal:</span>
+      <button class="water-goal-btn" onclick="adjustWaterGoal(-1)">−</button>
+      <span class="water-goal-label" id="waterGoalLabel">8 glasses</span>
+      <button class="water-goal-btn" onclick="adjustWaterGoal(1)">+</button>
+    </div>
+    <div style="margin-top:12px">
+      <label class="field-label">Meals</label>
+      <div class="meal-row"><div class="meal-label-tag">Breakfast</div><input class="field-input" type="text" id="meal_breakfast" placeholder="What did you eat?"></div>
+      <div class="meal-row"><div class="meal-label-tag">Lunch</div><input class="field-input" type="text" id="meal_lunch" placeholder="What did you eat?"></div>
+      <div class="meal-row"><div class="meal-label-tag">Dinner</div><input class="field-input" type="text" id="meal_dinner" placeholder="What did you eat?"></div>
+      <div class="meal-row"><div class="meal-label-tag">Snack</div><input class="field-input" type="text" id="meal_snack" placeholder="Snacks, extras…"></div>
+
+    </div>
+  </div>
+</div>
+
+<div class="section">
+  <div class="section-header"><span class="section-title">Nap &amp; Sleep Log</span></div>
+  <div class="section-body">
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:8px;" class="nap-grid">
+      <div class="field-group"><label class="field-label">Start</label><input class="field-input" type="time" id="napStart"></div>
+      <div class="field-group"><label class="field-label">End</label><input class="field-input" type="time" id="napEnd"></div>
+      <div class="field-group"><label class="field-label">Type</label><select class="field-input" id="napType"><option value="nap">😴 Nap</option><option value="night">🌙 Night sleep</option></select></div>
+      <div style="display:flex;align-items:flex-end;"><button class="btn-add" onclick="logNap()" style="width:100%">Add</button></div>
+    </div>
+    <div id="napLog"><div class="empty-state">No sleep logged today.</div></div>
+    <div style="margin-top:8px;font-size:12px;color:#b89c9c" id="napTotal"></div>
+  </div>
+</div>
+
+<div class="section">
+  <div class="section-header"><span class="section-title">To-Do</span></div>
+  <div class="section-body">
+    <div class="todo-input-row">
+      <input class="field-input" type="text" id="todoInput" placeholder="Add a task…" onkeydown="if(event.key==='Enter')addTodo()">
+      <button class="btn-add" onclick="addTodo()">Add</button>
+    </div>
+    <ul class="todo-list" id="todoList"><li class="empty-state">Nothing on the list.</li></ul>
+    <div style="margin-top:8px">
+      <button class="todo-carry-btn" onclick="carryTodosForward()" title="Copy unfinished tasks to today">↩ Carry unfinished tasks from yesterday</button>
+    </div>
+  </div>
+</div>
+
+<div class="section">
+  <div class="section-header"><span class="section-title">Notes</span></div>
+  <div class="section-body">
+    <textarea class="notes-area" id="notesArea" placeholder="Anything worth remembering today…" oninput="saveNotes()"></textarea>
+  </div>
+</div>
+```
+
+  </div>
+</div>
+
+<div class="privacy-note">🔒 <strong>All data stays on your device.</strong> Nothing is uploaded, shared, or tracked — ever. &nbsp;·&nbsp; Created by CurlysGlitching &nbsp;·&nbsp; v1.0
+  <span style="margin-left:12px"><button class="btn-danger" onclick="confirmClearData()">Clear all data</button></span>
+</div>
+
+<script>
+// ═══════════════════════════════════════
+//  CONSTANTS & STATE
+// ═══════════════════════════════════════
+const BABY_IDS = ['a','b','c','d'];
+const DEFAULT_NAMES = {a:'Baby A', b:'Baby B', c:'Baby C', d:'Baby D'};
+const BABY_COLORS = {a:'#c47a7a', b:'#a07ab8', c:'#7a9ec4', d:'#c49a7a'};
+
+let currentDate = todayStr();
+let activeBaby = 'a';
+let babyCount = 1;
+let feedType = 'breast';
+let feedSide = null;
+let editContext = null; // {section, id, baby}
+let confirmCallback = null;
+
+// ═══════════════════════════════════════
+//  STORAGE
+// ═══════════════════════════════════════
+function todayStr(){ return new Date().toISOString().slice(0,10); }
+function dateKey(s){ return `ppd_${currentDate}_${s}`; }
+function babyKey(s){ return dateKey(`baby${activeBaby}_${s}`); }
+function babyKeyFor(baby, s){ return `ppd_${currentDate}_baby${baby}_${s}`; }
+function load(k,d){ try{ const v=localStorage.getItem(k); return v?JSON.parse(v):d; }catch{ return d; } }
+function save(k,v){
+  try{
+    localStorage.setItem(k,JSON.stringify(v));
+    checkStorage();
+  }catch(e){
+    showToast('⚠️ Storage full — export a backup now!', true);
+  }
+}
+
+// ═══════════════════════════════════════
+//  STORAGE WARNING
+// ═══════════════════════════════════════
+function checkStorage(){
+  try{
+    let total=0;
+    for(let i=0;i<localStorage.length;i++){
+      const k=localStorage.key(i);
+      total+=(localStorage.getItem(k)||'').length;
+    }
+    const show = total > 4000000;
+    let warn = document.getElementById('storageWarning');
+    if(show){
+      if(!warn){
+        warn = document.createElement('div');
+        warn.id = 'storageWarning';
+        warn.className = 'storage-warning visible';
+        // Insert before babyNameRow
+        const nameRow = document.getElementById('babyNameRow');
+        nameRow.parentNode.insertBefore(warn, nameRow);
+      }
+      warn.textContent = '⚠️ Storage nearly full. Export a backup now.';
+      warn.classList.add('visible');
+    } else if(warn){
+      warn.remove(); // Remove entirely when not needed
+    }
+  }catch{}
+}
+
+// ═══════════════════════════════════════
+//  TOAST
+// ═══════════════════════════════════════
+let toastTimer=null;
+function showToast(msg, isError=false){
+  const t=document.getElementById('toast');
+  t.textContent=msg;
+  t.className='toast'+(isError?' error':'');
+  void t.offsetWidth; // reflow
+  t.classList.add('show');
+  if(toastTimer) clearTimeout(toastTimer);
+  toastTimer=setTimeout(()=>t.classList.remove('show'), 2800);
+}
+
+// ═══════════════════════════════════════
+//  CONFIRM MODAL
+// ═══════════════════════════════════════
+function showConfirm(title, msg, onOk, danger=true){
+  document.getElementById('confirmTitle').textContent=title;
+  document.getElementById('confirmMsg').textContent=msg;
+  const btn=document.getElementById('confirmOkBtn');
+  btn.textContent=danger?'Yes, delete':'Yes';
+  btn.style.background=danger?'#c06060':'var(--accent)';
+  confirmCallback=onOk;
+  btn.onclick=()=>{closeConfirm();onOk();};
+  document.getElementById('confirmModal').classList.remove('hidden');
+}
+function closeConfirm(){ document.getElementById('confirmModal').classList.add('hidden'); confirmCallback=null; }
+
+// ═══════════════════════════════════════
+//  CLEAR ALL DATA
+// ═══════════════════════════════════════
+function confirmClearData(){
+  showConfirm('Clear all data?',
+    'This will permanently delete all feeds, diapers, todos, notes, and settings. Export a backup first if you want to keep your data.',
+    ()=>{
+      const keys=[];
+      for(let i=0;i<localStorage.length;i++) keys.push(localStorage.key(i));
+      keys.filter(k=>k&&k.startsWith('ppd_')).forEach(k=>localStorage.removeItem(k));
+      // reset state
+      babyCount=1; activeBaby='a'; feedType='breast'; feedSide=null;
+      loadAllForDate();
+      updateBabyCountLabel();
+      refreshBabyUI();
+      showToast('All data cleared');
+    }
+  );
+}
+
+// ═══════════════════════════════════════
+//  SPLASH
+// ═══════════════════════════════════════
+function closeSplash(){
+  document.getElementById('splashOverlay').style.display='none';
+  save('ppd_splash_seen',true);
+}
+if(load('ppd_splash_seen',false)) document.getElementById('splashOverlay').style.display='none';
+
+// ═══════════════════════════════════════
+//  BABY NAMES
+// ═══════════════════════════════════════
+function getBabyName(id){
+  // Return saved name, or default
+  return load(`ppd_name_${id}`, DEFAULT_NAMES[id]);
+}
+function saveBabyName(id, name){
+  if(name && name.trim()) save(`ppd_name_${id}`, name.trim());
+  else localStorage.removeItem(`ppd_name_${id}`);
+}
+
+function startEditName(){
+  const input = document.getElementById('babyNameInput');
+  const display = document.getElementById('babyNameDisplay');
+  display.classList.add('hidden');
+  input.classList.remove('hidden');
+  // placeholder = default (Baby A, Baby B…), value = custom name only if differs from default
+  input.placeholder = DEFAULT_NAMES[activeBaby];
+  const saved = localStorage.getItem(`ppd_name_${activeBaby}`);
+  input.value = saved ? JSON.parse(saved) : '';
+  input.focus();
+}
+
+function saveNameEdit(){
+  const input = document.getElementById('babyNameInput');
+  const display = document.getElementById('babyNameDisplay');
+  saveBabyName(activeBaby, input.value);
+  input.classList.add('hidden');
+  display.classList.remove('hidden');
+  refreshBabyUI();
+}
+
+function refreshBabyUI(){
+  const name = getBabyName(activeBaby);
+  document.getElementById('babyNameDisplay').textContent = name;
+  const dotEl = document.getElementById('babyDot'); if(dotEl){ dotEl.style.background = BABY_COLORS[activeBaby]; dotEl.style.fontSize = '0'; dotEl.style.lineHeight = '0'; }
+  document.getElementById('logFeedBtn').className = `btn-primary c-${activeBaby}`;
+  renderBabyTabs();
+}
+
+// ═══════════════════════════════════════
+//  BABY COUNT / TABS
+// ═══════════════════════════════════════
+function setBabyCount(n){
+  babyCount = n;
+  save('ppd_baby_count', n);
+  if(BABY_IDS.indexOf(activeBaby) >= n) activeBaby = 'a';
+  // update option highlights
+  document.querySelectorAll('.multiples-option').forEach((o,i) => o.classList.toggle('selected', i+1===n));
+  updateBabyCountLabel();
+  closeMultiplesDropdown();
+  refreshBabyUI();
+  loadBabySection();
+}
+
+function updateBabyCountLabel(){
+  const labels = ['1 baby','twins (2)','triplets (3)','quads (4)'];
+  document.getElementById('babyCountLabel').textContent = 'Tracking: '+labels[babyCount-1];
+}
+
+function renderBabyTabs(){
+  // Create babyTabs element if it doesn't exist yet
+  let wrap = document.getElementById('babyTabs');
+  if(!wrap){
+    wrap = document.createElement('div');
+    wrap.id = 'babyTabs';
+    wrap.className = 'baby-tabs';
+    // Insert after the storage-warning comment, before baby-name-row
+    const nameRow = document.getElementById('babyNameRow');
+    nameRow.parentNode.insertBefore(wrap, nameRow);
+  }
+  wrap.innerHTML = '';
+  if(babyCount <= 1){ wrap.style.display='none'; return; }
+  wrap.style.display='flex';
+  for(let i=0;i<babyCount;i++){
+    const id = BABY_IDS[i];
+    const btn = document.createElement('button');
+    btn.className = 'baby-tab' + (activeBaby===id ? ` tab-${id}` : '');
+    const lastFed = getLastFedStr(id);
+    btn.innerHTML = `${escHtml(getBabyName(id))}${lastFed?`<span class="baby-tab-sub">${lastFed}</span>`:''}`;
+    btn.onclick = () => selectBaby(id);
+    wrap.appendChild(btn);
+  }
+}
+
+function selectBaby(id){
+  activeBaby = id;
+  refreshBabyUI();
+  loadBabySection();
+}
+
+// ═══════════════════════════════════════
+//  MULTIPLES DROPDOWN
+// ═══════════════════════════════════════
+function toggleMultiplesDropdown(){
+  const dd = document.getElementById('multiplesDropdown');
+  const btn = document.getElementById('multiplesBtn');
+  const isOpen = dd.classList.toggle('open');
+  btn.classList.toggle('open', isOpen);
+}
+function closeMultiplesDropdown(){
+  document.getElementById('multiplesDropdown').classList.remove('open');
+  document.getElementById('multiplesBtn').classList.remove('open');
+}
+
+// ── Export dropdown ──
+function toggleExportDropdown(){
+  const dd = document.getElementById('exportDropdown');
+  const btn = document.getElementById('exportBtn');
+  const isOpen = dd.classList.toggle('open');
+  btn.classList.toggle('open', isOpen);
+}
+function closeExportDropdown(){
+  document.getElementById('exportDropdown').classList.remove('open');
+  document.getElementById('exportBtn').classList.remove('open');
+}
+
+document.addEventListener('click', e => {
+  const tp = document.getElementById('themePickerBtn')?.closest('.theme-picker-wrap');
+  if(tp && !tp.contains(e.target)) closeThemePicker();
+  if(!document.getElementById('multiplesBar').contains(e.target)) closeMultiplesDropdown();
+  const ew = document.getElementById('exportBtn')?.closest('.export-wrap');
+  if(ew && !ew.contains(e.target)) closeExportDropdown();
+});
+
+// ═══════════════════════════════════════
+//  DATE NAV
+// ═══════════════════════════════════════
+function updateDateLabel(){
+  const d = new Date(currentDate+'T12:00:00');
+  document.getElementById('dateLabel').textContent = d.toLocaleDateString(undefined,{weekday:'long',month:'long',day:'numeric'});
+  const now = todayStr();
+  document.getElementById('headerDate').textContent = currentDate===now ? 'Today' : (currentDate<now ? 'Past' : 'Future');
+}
+function changeDate(delta){
+  const d = new Date(currentDate+'T12:00:00');
+  d.setDate(d.getDate()+delta);
+  currentDate = d.toISOString().slice(0,10);
+  loadAllForDate();
+}
+function goToday(){ currentDate = todayStr(); loadAllForDate(); }
+
+// ═══════════════════════════════════════
+//  FEED TYPE & SIDE
+// ═══════════════════════════════════════
+function setFeedType(type){
+  feedType = type;
+  document.getElementById('btnBreast').className = 'feed-type-btn'+(type==='breast'?' active-breast':'');
+  document.getElementById('btnBottle').className = 'feed-type-btn'+(type==='bottle'?' active-bottle':'');
+  document.getElementById('sideField').style.display = type==='breast'?'block':'none';
+  document.getElementById('durationField').style.display = type==='breast'?'block':'none';
+  document.getElementById('amountField').classList.toggle('hidden', type==='breast');
+  document.getElementById('unitField').classList.toggle('hidden', type==='breast');
+  feedSide = null;
+  document.querySelectorAll('.side-btn').forEach(b=>b.classList.remove('active'));
+}
+function setSide(side){
+  feedSide = side;
+  ['btnLeft','btnRight','btnBoth'].forEach(id=>document.getElementById(id).classList.remove('active'));
+  document.getElementById({left:'btnLeft',right:'btnRight',both:'btnBoth'}[side]).classList.add('active');
+}
+
+// ═══════════════════════════════════════
+//  FEED LOG
+// ═══════════════════════════════════════
+function logFeed(){
+  const time = document.getElementById('feedTime').value || nowTime();
+  const entry = {id:Date.now(), time, type:feedType, baby:activeBaby, notes:document.getElementById('feedNotes').value.trim()};
+  if(feedType==='breast'){ entry.side=feedSide; entry.duration=document.getElementById('feedDuration').value; }
+  else { entry.amount=document.getElementById('feedAmount').value; entry.unit=document.getElementById('feedUnit').value; }
+  const feeds = load(babyKey('feeds'),[]);
+  feeds.push(entry);
+  feeds.sort((a,b)=>a.time.localeCompare(b.time));
+  save(babyKey('feeds'), feeds);
+  document.getElementById('feedDuration').value='';
+  document.getElementById('feedAmount').value='';
+  document.getElementById('feedNotes').value='';
+  feedSide=null;
+  document.querySelectorAll('.side-btn').forEach(b=>b.classList.remove('active'));
+  renderFeedLog();
+  renderCombinedSummary();
+}
+
+function renderFeedLog(){
+  const feeds = load(babyKey('feeds'),[]);
+  const el = document.getElementById('feedLog');
+  if(!feeds.length){ el.innerHTML='<div class="empty-state">No feeds logged today.</div>'; renderFeedSummary([]); return; }
+  el.innerHTML = feeds.map(f=>{
+    const badge = f.type==='breast'?'<span class="log-badge badge-breast">Breast</span>':'<span class="log-badge badge-bottle">Bottle</span>';
+    let detail='';
+    if(f.type==='breast'){
+      if(f.side) detail+=f.side.charAt(0).toUpperCase()+f.side.slice(1);
+      if(f.duration) detail+=(detail?' · ':'')+f.duration+' min';
+    } else if(f.amount){ detail+=f.amount+' '+f.unit; }
+    if(f.notes) detail+=(detail?' · ':'')+f.notes;
+    const babyBadge = babyCount>1 ? `<span class="log-badge badge-${f.baby}" style="margin-right:4px">${escHtml(getBabyName(f.baby))}</span>` : '';
+    return `<div class="log-entry">
+      <div class="log-time">${f.time}</div>
+      <div class="log-details">${babyBadge}${badge}<br><span style="font-size:11px;color:var(--ink-faint)">${detail}</span></div>
+      <button class="log-delete" title="Edit" onclick="editFeed(${f.id})" style="margin-right:2px;color:var(--ink-faint)">✎</button>
+      <button class="log-delete" onclick="showConfirm('Delete feed entry?','This can\'t be undone.',()=>{deleteFeed(${f.id})})">×</button>
+    </div>`;
+  }).join('');
+  renderFeedSummary(feeds);
+}
+
+function renderFeedSummary(feeds){
+  const bc=feeds.filter(f=>f.type==='breast').length;
+  const bo=feeds.filter(f=>f.type==='bottle').length;
+  const oz=feeds.filter(f=>f.type==='bottle'&&f.unit==='oz').reduce((s,f)=>s+(parseFloat(f.amount)||0),0);
+  const ml=feeds.filter(f=>f.type==='bottle'&&f.unit==='ml').reduce((s,f)=>s+(parseFloat(f.amount)||0),0);
+  const chips=[];
+  if(bc) chips.push(`${bc} breast feed${bc>1?'s':''}`);
+  if(bo) chips.push(`${bo} bottle${bo>1?'s':''}`);
+  if(oz) chips.push(`${oz.toFixed(1)} oz total`);
+  if(ml) chips.push(`${Math.round(ml)} ml total`);
+  document.getElementById('feedSummary').innerHTML = chips.map(c=>`<span class="summary-chip">${c}</span>`).join('');
+}
+
+function deleteFeed(id){
+  save(babyKey('feeds'), load(babyKey('feeds'),[]).filter(f=>f.id!==id));
+  renderFeedLog();
+  renderCombinedSummary();
+}
+function editFeed(id){
+  const feeds=load(babyKey('feeds'),[]);
+  const f=feeds.find(f=>f.id===id);
+  if(!f) return;
+  editContext={section:'feed',id,baby:activeBaby};
+  document.getElementById('editModalTitle').textContent='Edit Feed Entry';
+  const isBreast=f.type==='breast';
+  document.getElementById('editModalBody').innerHTML=`
+    <div class="edit-field-row">
+      <div class="field-group">
+        <label class="field-label">Time</label>
+        <input class="field-input" type="time" id="editFeedTime" value="${f.time}">
+      </div>
+      <div class="field-group">
+        <label class="field-label">Type</label>
+        <select class="field-input" id="editFeedType" onchange="toggleEditFeedFields()">
+          <option value="breast" ${isBreast?'selected':''}>🤱 Breast</option>
+          <option value="bottle" ${!isBreast?'selected':''}>🍼 Bottle</option>
+        </select>
+      </div>
+    </div>
+    <div id="editBreastFields" ${!isBreast?'style="display:none"':''}>
+      <div class="edit-field-row">
+        <div class="field-group">
+          <label class="field-label">Side</label>
+          <select class="field-input" id="editFeedSide">
+            <option value="" ${!f.side?'selected':''}>—</option>
+            <option value="left" ${f.side==='left'?'selected':''}>Left</option>
+            <option value="right" ${f.side==='right'?'selected':''}>Right</option>
+            <option value="both" ${f.side==='both'?'selected':''}>Both</option>
+          </select>
+        </div>
+        <div class="field-group">
+          <label class="field-label">Duration (min)</label>
+          <input class="field-input" type="number" id="editFeedDuration" value="${f.duration||''}" min="1" max="120">
+        </div>
+      </div>
+    </div>
+    <div id="editBottleFields" ${isBreast?'style="display:none"':''}>
+      <div class="edit-field-row">
+        <div class="field-group">
+          <label class="field-label">Amount</label>
+          <input class="field-input" type="number" id="editFeedAmount" value="${f.amount||''}" step="0.5">
+        </div>
+        <div class="field-group">
+          <label class="field-label">Unit</label>
+          <select class="field-input" id="editFeedUnit">
+            <option value="oz" ${f.unit==='oz'?'selected':''}>oz</option>
+            <option value="ml" ${f.unit==='ml'?'selected':''}>ml</option>
+          </select>
+        </div>
+      </div>
+    </div>
+    <div class="field-group" style="margin-top:8px">
+      <label class="field-label">Notes</label>
+      <input class="field-input" type="text" id="editFeedNotes" value="${escHtml(f.notes||'')}">
+    </div>`;
+  document.getElementById('editModal').classList.remove('hidden');
+}
+function toggleEditFeedFields(){
+  const isBreast=document.getElementById('editFeedType').value==='breast';
+  document.getElementById('editBreastFields').style.display=isBreast?'':'none';
+  document.getElementById('editBottleFields').style.display=isBreast?'none':'';
+}
+
+// ═══════════════════════════════════════
+//  DIAPER
+// ═══════════════════════════════════════
+function logDiaper(type){
+  const d=load(babyKey('diapers'),[]);
+  const timeEl=document.getElementById('diaperTime');
+  const time=timeEl&&timeEl.value?timeEl.value:nowTime();
+  d.push({id:Date.now(), time, type});
+  d.sort((a,b)=>a.time.localeCompare(b.time));
+  save(babyKey('diapers'),d);
+  renderDiaperLog();
+  renderCombinedSummary();
+}
+function renderDiaperLog(){
+  const diapers=load(babyKey('diapers'),[]);
+  const el=document.getElementById('diaperLog');
+  let wet=0,dirty=0;
+  diapers.forEach(d=>{if(d.type==='wet')wet++;else if(d.type==='dirty')dirty++;else{wet++;dirty++;}});
+  document.getElementById('diaperCount').innerHTML=`Today: <strong>${wet}</strong> wet &nbsp;·&nbsp; <strong>${dirty}</strong> dirty`;
+  if(!diapers.length){el.innerHTML='<div class="empty-state">No diapers logged today.</div>';return;}
+  el.innerHTML=diapers.map(d=>{
+    const icon=d.type==='wet'?'💧':d.type==='dirty'?'💩':'💧💩';
+    const label=d.type==='both'?'Both':d.type.charAt(0).toUpperCase()+d.type.slice(1);
+    return `<div class="log-entry">
+      <div class="log-time">${d.time}</div>
+      <div class="log-details">${icon} ${label}</div>
+      <button class="log-delete" title="Edit" onclick="editDiaper(${d.id})" style="margin-right:2px;color:var(--ink-faint)">✎</button>
+      <button class="log-delete" onclick="showConfirm('Delete diaper entry?','This can\'t be undone.',()=>{deleteDiaper(${d.id})})">×</button>
+    </div>`;
+  }).join('');
+}
+function deleteDiaper(id){
+  save(babyKey('diapers'),load(babyKey('diapers'),[]).filter(d=>d.id!==id));
+  renderDiaperLog();
+  renderCombinedSummary();
+}
+function editDiaper(id){
+  const diapers=load(babyKey('diapers'),[]);
+  const d=diapers.find(d=>d.id===id);
+  if(!d) return;
+  editContext={section:'diaper',id,baby:activeBaby};
+  document.getElementById('editModalTitle').textContent='Edit Diaper Entry';
+  document.getElementById('editModalBody').innerHTML=`
+    <div class="edit-field-row">
+      <div class="field-group">
+        <label class="field-label">Time</label>
+        <input class="field-input" type="time" id="editDiaperTime" value="${d.time}">
+      </div>
+      <div class="field-group">
+        <label class="field-label">Type</label>
+        <select class="field-input" id="editDiaperType">
+          <option value="wet" ${d.type==='wet'?'selected':''}>💧 Wet</option>
+          <option value="dirty" ${d.type==='dirty'?'selected':''}>💩 Dirty</option>
+          <option value="both" ${d.type==='both'?'selected':''}>Both</option>
+        </select>
+      </div>
+    </div>`;
+  document.getElementById('editModal').classList.remove('hidden');
+}
+
+// ═══════════════════════════════════════
+//  MOOD & ENERGY
+// ═══════════════════════════════════════
+function setMood(m){
+  document.querySelectorAll('.mood-btn').forEach(b=>b.classList.toggle('selected',b.textContent.toLowerCase()===m.toLowerCase()));
+  save(dateKey('mood'),m);
+}
+function setEnergy(n){
+  const labels=['','Depleted','Low','Okay','Good','Great'];
+  const bgs=['','#f0e8e8','#f5efe0','#e8f0e7','#e8f2f7','#fceee8'];
+  const borders=['','#d4a0a0','#c9a870','#9db89a','#8fb5c8','#c47a7a'];
+  const colors=['','#9a6060','#8a7040','#507050','#407090','#c47a7a'];
+  document.querySelectorAll('#energyRow .energy-dot').forEach((b,i)=>{
+    const sel = i+1===n;
+    b.className='energy-dot'+(sel?` s${i+1}`:'');
+    b.style.background = sel ? bgs[i+1] : '#ffffff';
+    b.style.borderColor = sel ? borders[i+1] : '#f0ddd8';
+    b.style.color = sel ? colors[i+1] : '#b89c9c';
+    b.style.webkitTextFillColor = sel ? colors[i+1] : '#b89c9c';
+  });
+  document.getElementById('energyLabel').textContent=labels[n];
+  save(dateKey('energy'),n);
+}
+function loadMood(){
+  const m=load(dateKey('mood'),null);
+  if(m) setMood(m); else document.querySelectorAll('.mood-btn').forEach(b=>b.classList.remove('selected'));
+  const e=load(dateKey('energy'),null);
+  if(e) setEnergy(e); else {
+    document.querySelectorAll('#energyRow .energy-dot').forEach(b=>{
+      b.className='energy-dot';
+      b.style.background='#ffffff'; b.style.borderColor='#f0ddd8';
+      b.style.color='#b89c9c'; b.style.webkitTextFillColor='#b89c9c';
+    });
+    document.getElementById('energyLabel').textContent='—';
+  }
+}
+
+// ═══════════════════════════════════════
+//  WATER
+// ═══════════════════════════════════════
+function renderWater(){
+  const count=load(dateKey('water'),0);
+  const goal=load('ppd_water_goal',8);
+  const cups=document.getElementById('waterCups');
+  cups.innerHTML='';
+  const max=Math.max(goal,10);
+  for(let i=1;i<=max;i++){
+    const b=document.createElement('button');
+    const isFilled = i<=count;
+    b.className='water-cup'+(isFilled?' filled':'');
+    b.style.background = isFilled ? '#c47a7a' : '#ffffff';
+    b.style.borderColor = '#c47a7a';
+    b.title=`${i} glass${i>1?'es':''}`;
+    b.onclick=()=>{save(dateKey('water'),i===count?i-1:i);renderWater();};
+    cups.appendChild(b);
+  }
+  document.getElementById('waterLabel').textContent=`${count} / ${goal}`;
+  const gl=document.getElementById('waterGoalLabel');
+  if(gl) gl.textContent=`${goal} glass${goal!==1?'es':''}`;
+}
+function adjustWaterGoal(delta){
+  const goal=Math.min(20,Math.max(4,load('ppd_water_goal',8)+delta));
+  save('ppd_water_goal',goal);
+  renderWater();
+}
+
+// ═══════════════════════════════════════
+//  MEALS
+// ═══════════════════════════════════════
+function saveMeals(){
+  const m={};
+  ['breakfast','lunch','dinner','snack'].forEach(k=>m[k]=document.getElementById('meal_'+k).value);
+  save(dateKey('meals'),m);
+}
+function loadMeals(){
+  const m=load(dateKey('meals'),{});
+  ['breakfast','lunch','dinner','snack'].forEach(k=>document.getElementById('meal_'+k).value=m[k]||'');
+}
+document.addEventListener('DOMContentLoaded',()=>{ ['meal_breakfast','meal_lunch','meal_dinner','meal_snack'].forEach(id=>{ const el=document.getElementById(id); if(el) el.addEventListener('blur',saveMeals); }); });
+
+// ═══════════════════════════════════════
+//  NAP LOG
+// ═══════════════════════════════════════
+function logNap(){
+  const start=document.getElementById('napStart').value;
+  const end=document.getElementById('napEnd').value;
+  if(!start){ showToast('Please enter a start time', true); return; }
+  if(end){
+    const mins=timeDiff(start,end);
+    if(mins<0||mins>900){ showToast('Duration looks off — check start/end times', true); return; }
+  }
+  const naps=load(dateKey('naps'),[]);
+  naps.push({id:Date.now(), start, end, type:document.getElementById('napType').value});
+  naps.sort((a,b)=>a.start.localeCompare(b.start));
+  save(dateKey('naps'),naps);
+  document.getElementById('napStart').value='';
+  document.getElementById('napEnd').value='';
+  renderNapLog();
+}
+function renderNapLog(){
+  const naps=load(dateKey('naps'),[]);
+  const el=document.getElementById('napLog');
+  if(!naps.length){el.innerHTML='<div class="empty-state">No sleep logged today.</div>';document.getElementById('napTotal').textContent='';return;}
+  let total=0;
+  el.innerHTML=naps.map(n=>{
+    let dur='';
+    if(n.start&&n.end){const m=timeDiff(n.start,n.end);total+=m;dur=` (${fmtDur(m)})`;}
+    return `<div class="log-entry">
+      <div class="log-time">${n.start}</div>
+      <div class="log-details">${n.type==='night'?'🌙 Night':'😴 Nap'} ${n.end?'→ '+n.end:''}<span style="color:#b89c9c;font-size:11px">${dur}</span></div>
+      <button class="log-delete" title="Edit" onclick="editNap(${n.id})" style="margin-right:2px;color:var(--ink-faint)">✎</button>
+      <button class="log-delete" onclick="showConfirm('Delete sleep entry?','',()=>deleteNap(${n.id}))">×</button>
+    </div>`;
+  }).join('');
+  document.getElementById('napTotal').textContent=total?`Total rest: ${fmtDur(total)}`:'';
+}
+function deleteNap(id){save(dateKey('naps'),load(dateKey('naps'),[]).filter(n=>n.id!==id));renderNapLog();}
+function editNap(id){
+  const naps=load(dateKey('naps'),[]);
+  const n=naps.find(n=>n.id===id);
+  if(!n) return;
+  editContext={section:'nap',id};
+  document.getElementById('editModalTitle').textContent='Edit Sleep Entry';
+  document.getElementById('editModalBody').innerHTML=`
+    <div class="edit-field-row">
+      <div class="field-group">
+        <label class="field-label">Start</label>
+        <input class="field-input" type="time" id="editNapStart" value="${n.start}">
+      </div>
+      <div class="field-group">
+        <label class="field-label">End</label>
+        <input class="field-input" type="time" id="editNapEnd" value="${n.end||''}">
+      </div>
+    </div>
+    <div class="field-group">
+      <label class="field-label">Type</label>
+      <select class="field-input" id="editNapType">
+        <option value="nap" ${n.type==='nap'?'selected':''}>😴 Nap</option>
+        <option value="night" ${n.type==='night'?'selected':''}>🌙 Night sleep</option>
+      </select>
+    </div>`;
+  document.getElementById('editModal').classList.remove('hidden');
+}
+function timeDiff(s,e){const[sh,sm]=s.split(':').map(Number);let[eh,em]=e.split(':').map(Number);if(eh<sh)eh+=24;return(eh*60+em)-(sh*60+sm);}
+function fmtDur(m){return m<60?m+'m':Math.floor(m/60)+'h '+(m%60?m%60+'m':'');}
+
+// ═══════════════════════════════════════
+//  TO-DO
+// ═══════════════════════════════════════
+function addTodo(){
+  const input=document.getElementById('todoInput');
+  const text=input.value.trim();
+  if(!text) return;
+  const todos=load(dateKey('todos'),[]);
+  todos.push({id:Date.now(),text,done:false});
+  save(dateKey('todos'),todos);
+  input.value='';
+  renderTodos();
+}
+function toggleTodo(id){
+  const todos=load(dateKey('todos'),[]);
+  const t=todos.find(t=>t.id===id);
+  if(t) t.done=!t.done;
+  save(dateKey('todos'),todos);
+  renderTodos();
+}
+function deleteTodo(id){showConfirm('Delete task?','',()=>{save(dateKey('todos'),load(dateKey('todos'),[]).filter(t=>t.id!==id));renderTodos();});}
+function renderTodos(){
+  const todos=load(dateKey('todos'),[]);
+  const el=document.getElementById('todoList');
+  if(!todos.length){el.innerHTML='<li class="empty-state">Nothing on the list.</li>';return;}
+  el.innerHTML=todos.map(t=>`
+    <li class="todo-item">
+      <button class="todo-check ${t.done?'done':''}" style="${t.done?'background:#c47a7a!important;border-color:#c47a7a!important':''}" onclick="toggleTodo(${t.id})"></button>
+      <span class="todo-text ${t.done?'done':''}">${escHtml(t.text)}</span>
+      <button class="log-delete" onclick="deleteTodo(${t.id})">×</button>
+    </li>`).join('');
+}
+
+// ── Carry unfinished todos from yesterday ──
+function carryTodosForward(){
+  const d=new Date(currentDate+'T12:00:00');
+  d.setDate(d.getDate()-1);
+  const yesterday=d.toISOString().slice(0,10);
+  const yKey=`ppd_${yesterday}_todos`;
+  const yTodos=load(yKey,[]);
+  const unfinished=yTodos.filter(t=>!t.done);
+  if(!unfinished.length){ showToast('No unfinished tasks from yesterday'); return; }
+  const todos=load(dateKey('todos'),[]);
+  const existingTexts=new Set(todos.map(t=>t.text.toLowerCase()));
+  let added=0;
+  unfinished.forEach(t=>{
+    if(!existingTexts.has(t.text.toLowerCase())){
+      todos.push({id:Date.now()+added,text:t.text,done:false});
+      added++;
+    }
+  });
+  save(dateKey('todos'),todos);
+  renderTodos();
+  showToast(added?`${added} task${added>1?'s':''} carried forward`:'All tasks already here');
+}
+
+// ═══════════════════════════════════════
+//  NOTES
+// ═══════════════════════════════════════
+function saveNotes(){save(dateKey('notes'),document.getElementById('notesArea').value);}
+function loadNotes(){document.getElementById('notesArea').value=load(dateKey('notes'),'');}
+
+// ═══════════════════════════════════════
+//  EXPORT / IMPORT
+// ═══════════════════════════════════════
+function getAllData(){
+  const data={version:'1.0',exported:new Date().toISOString(),settings:{babyCount,names:{},color:load('ppd_color','blush'),theme:load('ppd_theme','light'),waterGoal:load('ppd_water_goal',8)},days:{}};
+  BABY_IDS.forEach(id=>data.settings.names[id]=getBabyName(id));
+  for(let i=0;i<localStorage.length;i++){
+    const key=localStorage.key(i);
+    if(key&&key.startsWith('ppd_')){
+      try{data.days[key]=JSON.parse(localStorage.getItem(key));}catch{data.days[key]=localStorage.getItem(key);}
+    }
+  }
+  return data;
+}
+function exportJSON(){
+  const blob=new Blob([JSON.stringify(getAllData(),null,2)],{type:'application/json'});
+  const a=document.createElement('a');
+  a.href=URL.createObjectURL(blob);
+  a.download=`postpartum-planner-backup-${todayStr()}.json`;
+  a.click();
+}
+function exportCSV(){
+  const rows=[['Date','Baby','EntryType','FeedType','Side','Duration_min','Amount','Unit','DiaperType','Time','Notes']];
+  for(let i=0;i<localStorage.length;i++){
+    const key=localStorage.key(i);
+    if(!key||!key.startsWith('ppd_')) continue;
+    const m=key.match(/^ppd_(\d{4}-\d{2}-\d{2})_baby([a-d])_(feeds|diapers)$/);
+    if(!m) continue;
+    const[,date,baby,type]=m;
+    try{
+      const entries=JSON.parse(localStorage.getItem(key));
+      entries.forEach(e=>{
+        if(type==='feeds') rows.push([date,getBabyName(baby),'feed',e.type||'',e.side||'',e.duration||'',e.amount||'',e.unit||'','',e.time||'',e.notes||'']);
+        else rows.push([date,getBabyName(baby),'diaper','','','','','',e.type||'',e.time||'','']);
+      });
+    }catch{}
+  }
+  const csv=rows.map(r=>r.map(c=>`"${String(c).replace(/"/g,'""')}"`).join(',')).join('\n');
+  const blob=new Blob([csv],{type:'text/csv'});
+  const a=document.createElement('a');
+  a.href=URL.createObjectURL(blob);
+  a.download=`postpartum-planner-${todayStr()}.csv`;
+  a.click();
+}
+function closeEditModal(){ document.getElementById('editModal').classList.add('hidden'); editContext=null; }
+function saveEditModal(){
+  if(!editContext) return;
+  if(editContext.section==='diaper'){
+    const key=`ppd_${currentDate}_baby${editContext.baby}_diapers`;
+    const diapers=load(key,[]);
+    const d=diapers.find(d=>d.id===editContext.id);
+    if(d){
+      d.time=document.getElementById('editDiaperTime').value||d.time;
+      d.type=document.getElementById('editDiaperType').value;
+      diapers.sort((a,b)=>a.time.localeCompare(b.time));
+      save(key,diapers);
+    }
+    renderDiaperLog();
+    renderCombinedSummary();
+  } else if(editContext.section==='feed'){
+    const key=`ppd_${currentDate}_baby${editContext.baby}_feeds`;
+    const feeds=load(key,[]);
+    const f=feeds.find(f=>f.id===editContext.id);
+    if(f){
+      f.time=document.getElementById('editFeedTime').value||f.time;
+      f.type=document.getElementById('editFeedType').value;
+      f.notes=document.getElementById('editFeedNotes').value;
+      if(f.type==='breast'){
+        f.side=document.getElementById('editFeedSide').value;
+        f.duration=document.getElementById('editFeedDuration').value;
+        delete f.amount; delete f.unit;
+      } else {
+        f.amount=document.getElementById('editFeedAmount').value;
+        f.unit=document.getElementById('editFeedUnit').value;
+        delete f.side; delete f.duration;
+      }
+      feeds.sort((a,b)=>a.time.localeCompare(b.time));
+      save(key,feeds);
+    }
+    renderFeedLog();
+    renderFeedSummary(load(key,[]));
+    renderCombinedSummary();
+  } else if(editContext.section==='nap'){
+    const naps=load(dateKey('naps'),[]);
+    const n=naps.find(n=>n.id===editContext.id);
+    if(n){
+      const s=document.getElementById('editNapStart').value||n.start;
+      const e=document.getElementById('editNapEnd').value;
+      if(e){const m=timeDiff(s,e);if(m<0||m>900){showToast('Duration looks off',true);return;}}
+      n.start=s; n.end=e; n.type=document.getElementById('editNapType').value;
+      naps.sort((a,b)=>a.start.localeCompare(b.start));
+      save(dateKey('naps'),naps);
+    }
+    renderNapLog();
+  }
+  closeEditModal();
+  showToast('Entry updated');
+}
+
+function openImport(){document.getElementById('importModal').classList.remove('hidden');}
+function closeImport(){document.getElementById('importModal').classList.add('hidden');document.getElementById('importText').value='';}
+function doImport(){
+  try{
+    const data=JSON.parse(document.getElementById('importText').value.trim());
+    if(data.days) Object.entries(data.days).forEach(([k,v])=>{if(!localStorage.getItem(k))localStorage.setItem(k,JSON.stringify(v));});
+    if(data.settings){
+      if(data.settings.babyCount) setBabyCount(data.settings.babyCount);
+      if(data.settings.names) Object.entries(data.settings.names).forEach(([id,name])=>saveBabyName(id,name));
+      if(data.settings.color) setColorTheme(data.settings.color);
+      if(data.settings.theme==='dark'){ document.documentElement.setAttribute('data-theme','dark'); save('ppd_theme','dark'); }
+      if(data.settings.waterGoal) save('ppd_water_goal',data.settings.waterGoal);
+    }
+    closeImport();
+    loadAllForDate();
+    showToast('Import successful! ✓');
+  }catch{
+    showToast("Couldn't read that file — check the JSON format", true);
+  }
+}
+
+// ═══════════════════════════════════════
+//  COMBINED BABY SUMMARY
+// ═══════════════════════════════════════
+function renderCombinedSummary(){
+  const wrap=document.getElementById('combinedSummary');
+  const row=document.getElementById('combinedRow');
+  if(!wrap||!row) return;
+  if(babyCount<=1){ wrap.classList.add('hidden'); return; }
+  wrap.classList.remove('hidden');
+  const ct=document.getElementById('combinedTitle'); if(ct) ct.textContent='Today — all babies';
+  const chips=[];
+  for(let i=0;i<babyCount;i++){
+    const id=BABY_IDS[i];
+    const name=getBabyName(id);
+    const feeds=load(`ppd_${currentDate}_baby${id}_feeds`,[]);
+    const diapers=load(`ppd_${currentDate}_baby${id}_diapers`,[]);
+    const fCount=feeds.length;
+    let wetCount=0,dirtyCount=0;
+    diapers.forEach(d=>{if(d.type==='wet')wetCount++;else if(d.type==='dirty')dirtyCount++;else{wetCount++;dirtyCount++;}});
+    chips.push(`<span class="summary-chip" style="background:var(--baby-${id}-soft,var(--accent-soft));color:var(--baby-${id},var(--accent))">${escHtml(name)}: ${fCount} feed${fCount!==1?'s':''}, ${wetCount}💧 ${dirtyCount}💩</span>`);
+    // last fed time
+    if(feeds.length){
+      const last=feeds[feeds.length-1];
+      const ago=minutesAgo(last.time);
+      chips.push(`<span class="summary-chip" style="background:var(--surface-2)">${escHtml(name)} last fed ${ago}</span>`);
+    }
+  }
+  row.innerHTML=chips.join('');
+}
+function minutesAgo(timeStr){
+  const [h,m]=timeStr.split(':').map(Number);
+  const now=new Date();
+  const then=new Date(); then.setHours(h,m,0,0);
+  const diff=Math.round((now-then)/60000);
+  if(diff<0) return 'earlier today';
+  if(diff<1) return 'just now';
+  if(diff<60) return `${diff}m ago`;
+  const hrs=Math.floor(diff/60); const mins=diff%60;
+  return mins?`${hrs}h ${mins}m ago`:`${hrs}h ago`;
+}
+
+// ── Last-fed indicator on tabs ──
+function getLastFedStr(babyId){
+  const feeds=load(`ppd_${currentDate}_baby${babyId}_feeds`,[]);
+  if(!feeds.length) return null;
+  return minutesAgo(feeds[feeds.length-1].time);
+}
+
+// ═══════════════════════════════════════
+//  HELPERS
+// ═══════════════════════════════════════
+function nowTime(){return new Date().toTimeString().slice(0,5);}
+function escHtml(s){return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');}
+
+// ═══════════════════════════════════════
+//  LOAD
+// ═══════════════════════════════════════
+function loadBabySection(){renderFeedLog();renderDiaperLog();renderCombinedSummary();}
+function loadAllForDate(){
+  updateDateLabel();
+  loadBabySection();
+  checkStorage();
+  loadMood();
+  renderWater();
+  loadMeals();
+  renderNapLog();
+  renderTodos();
+  loadNotes();
+}
+
+// ═══════════════════════════════════════
+//  DARK MODE
+// ═══════════════════════════════════════
+// ── Color theme
+const THEME_ACCENT = {
+  blush:    '#c47a7a',
+  lavender: '#8878c8',
+  sage:     '#6a9e7a',
+  peach:    '#e08850',
+  mauve:    '#a8588a'
+};
+
+function setColorTheme(name) {
+  document.documentElement.setAttribute('data-color', name);
+  save('ppd_color', name);
+  // update picker button color
+  document.getElementById('themePickerBtn').style.background = THEME_ACCENT[name] || '';
+  document.getElementById('themePickerBtn').style.boxShadow = `0 0 0 1.5px ${THEME_ACCENT[name]}, 0 2px 6px rgba(0,0,0,.15)`;
+  // update active swatch
+  document.querySelectorAll('.swatch').forEach(s => s.classList.toggle('active', s.getAttribute('onclick').includes(`'${name}'`)));
+  closeThemePicker();
+}
+
+function toggleThemePicker() {
+  const dd = document.getElementById('themeDropdown');
+  dd.classList.toggle('open');
+}
+function closeThemePicker() {
+  document.getElementById('themeDropdown').classList.remove('open');
+}
+
+function applyThemeStyles(isDark){
+  // Dark mode is handled entirely by CSS html[data-theme="dark"] selectors.
+  // This function is intentionally empty — no JS color manipulation needed.
+  // The CSS rules handle everything reliably across iOS Safari versions.
+}
+
+function toggleDark(){
+  const isDark = document.body.classList.contains('dark');
+  if(isDark){
+    document.body.classList.remove('dark');
+    document.documentElement.setAttribute('data-theme','light');
+    document.getElementById('darkToggle').textContent = '🌙';
+    save('ppd_theme','light');
+  } else {
+    document.body.classList.add('dark');
+    document.documentElement.setAttribute('data-theme','dark');
+    document.getElementById('darkToggle').textContent = '☀️';
+    save('ppd_theme','dark');
+  }
+}
+
+// ═══════════════════════════════════════
+//  INIT
+// ═══════════════════════════════════════
+// Restore saved color theme
+const savedColor = load('ppd_color', 'blush');
+setColorTheme(savedColor);
+
+// Restore saved dark/light via body.dark class
+const savedTheme = load('ppd_theme', 'light');
+if(savedTheme === 'dark'){
+  document.body.classList.add('dark');
+  document.documentElement.setAttribute('data-theme','dark');
+  document.getElementById('darkToggle').textContent = '☀️';
+}
+
+// Auto-refresh time fields every minute
+(function(){
+  function refreshTimes(){
+    const ft=document.getElementById('feedTime');
+    if(ft && !ft.dataset.userSet) ft.value=nowTime();
+    const dt=document.getElementById('diaperTime');
+    if(dt && !dt.dataset.userSet) dt.value=nowTime();
+  }
+  refreshTimes();
+  setInterval(refreshTimes, 60000);
+  const ft=document.getElementById('feedTime');
+  if(ft) ft.addEventListener('change',function(){ this.dataset.userSet='1'; });
+  const dt=document.getElementById('diaperTime');
+  if(dt) dt.addEventListener('change',function(){ this.dataset.userSet='1'; });
+})();
+
+babyCount = load('ppd_baby_count', 1);
+document.getElementById('feedTime').value = nowTime();
+document.querySelectorAll('.multiples-option').forEach((o,i)=>o.classList.toggle('selected',i+1===babyCount));
+updateBabyCountLabel();
+refreshBabyUI();
+loadAllForDate();
+</script>
+
+</body>
+</html>
